@@ -35,5 +35,18 @@ public class URLs {
         
         return NSURL(string: url, relativeToURL: baseURL)!
     }
+    
+    public class func getQuotes(forUser userId: String, withOffset dateOffset: String?) -> NSURL {
+        
+        let url : String
+        
+        if(dateOffset != nil && dateOffset?.characters.count > 0) {
+            url = String(format: "user/%@/quotes?dateOffset=%@", userId, dateOffset!)
+        } else {
+            url = String(format: "user/%@/quotes", userId)
+        }
+        
+        return NSURL(string: url, relativeToURL: baseURL)!
+    }
 
 }

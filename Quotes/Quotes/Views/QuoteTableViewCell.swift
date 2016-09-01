@@ -24,6 +24,12 @@ class QuoteTableViewCell: TableViewCell {
         }
     }
     
+    var searchTerm: String? {
+        didSet {
+            updateWithSearchTerm()
+        }
+    }
+    
     override class func CellIdentifier() -> String {
         return "QuoteCell"
     }
@@ -60,6 +66,10 @@ class QuoteTableViewCell: TableViewCell {
             }
         })
 
+    }
+    
+    private func updateWithSearchTerm() {
+        
     }
 
     // MARK: Interface Actions

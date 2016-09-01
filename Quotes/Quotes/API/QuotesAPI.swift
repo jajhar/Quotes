@@ -28,13 +28,13 @@ class QuotesAPI: APICommunication {
                                         return
                                     }
                                     
-                                    if clearState {
-                                        Quote.DeleteAllQuotes(inContext: CoreDataManager.managedObjectContext)
-                                    }
+//                                    if clearState {
+//                                        QuotesDataManager.DeleteAllQuotes(inContext: CoreDataManager.managedObjectContext)
+//                                    }
                                     
                                     var quotes = [Quote]()
                                     for rawQuote in responseArray {
-                                        if let quote = Quote.QuoteWithJSON(rawQuote, inManagedObjectContext: CoreDataManager.managedObjectContext) {
+                                        if let quote = QuotesDataManager.CreateQuoteWithJSON(rawQuote, inManagedObjectContext: CoreDataManager.managedObjectContext) {
                                             quotes.append(quote)
                                         }
                                     }
@@ -46,4 +46,41 @@ class QuotesAPI: APICommunication {
             failure(response, error)
         }
     }
+    
+    func getQuotes(forUser user: User, withOffset dateOffset: String?, clearState: Bool, completion: ([Quote]) -> Void, failure: FailureBlock) {
+        
+        super.sendRequestWithURL(URLs.getQuotes(forUser: user.id!, withOffset: dateOffset),
+                                 requestType: RequestType.GET,
+                                 parameters: nil,
+                                 completion: { (json) -> Void in
+                                    
+                                    guard let responseDict = json as? JSONDictionary else {
+                                        failure(nil, nil)
+                                        return
+                                    }
+                                    
+                                    guard let responseArray = responseDict["data"] as? [JSONDictionary] else {
+                                        failure(nil, nil)
+                                        return
+                                    }
+                                    
+//                                    if clearState {
+//                                        QuotesDataManager.DeleteAllQuotes(inContext: CoreDataManager.managedObjectContext)
+//                                    }
+                                    
+                                    var quotes = [Quote]()
+                                    for rawQuote in responseArray {
+                                        if let quote = QuotesDataManager.CreateQuoteWithJSON(rawQuote, inManagedObjectContext: CoreDataManager.managedObjectContext) {
+                                            quotes.append(quote)
+                                        }
+                                    }
+                                    
+                                    completion(quotes)
+                                    
+        }) { (response, error) -> Void in
+            print("ERROR: %@", error)
+            failure(response, error)
+        }
+    }
+
 }

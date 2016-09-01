@@ -41,6 +41,8 @@ class ProfileViewController: ViewController {
             // default to the logged in user
             user = AppData.sharedInstance.localSession?.localUser
         }
+        
+        profileHeaderView.user = user
     }
     
     override func viewDidAppear(animated: Bool) {

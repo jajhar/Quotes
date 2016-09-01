@@ -12,78 +12,38 @@ import CoreData
 
 class Quote: ModelObject {
 
+    var rawCreateTimeString: String?
+    var convertedDateString: String?
+    
     override func supplyJSONDictionary(json: JSONDictionary) {
         super.supplyJSONDictionary(json)
         
         if let id = json["id"] as? String {
             self.id = id
+            
+            // Get time created in proper format "n ago"
+            let index: String.Index = id.startIndex.advancedBy(8) // Swift 2
+            let objectId:String = id.substringToIndex(index) // "Stack"
+            var result: UInt64 = 0
+            let success :Bool = NSScanner(string: objectId).scanHexLongLong(&result)
+            if success {
+                let date = NSDate(timeIntervalSince1970: Double(result))
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "MM/dd/yy"
+                self.convertedDateString = formatter.stringFromDate(date)
+            }
         }
-
+        
         if let text = json["text"] as? String {
             self.text = text
         }
         
+        if let createDate = json["createdAt"] as? String {
+            self.rawCreateTimeString = createDate
+        }
+        
         if let ownerInfo = json["owner"] as? JSONDictionary {
-            self.owner = User.UserWithJSON(ownerInfo, inManagedObjectContext: CoreDataManager.managedObjectContext)
-        }
-    }
-    
-    class func QuoteWithJSON(json: JSONDictionary, inManagedObjectContext context: NSManagedObjectContext) -> Quote? {
-        
-        guard let objectId = json["id"] as? String else {
-            print("Warning: json id for quote is not a string value")
-            return nil
-        }
-        
-        let request = NSFetchRequest(entityName: "Quote")
-        request.predicate = NSPredicate(format: "id = %@", objectId)
-        
-        var quote: Quote?
-        
-        if let existingQuote = (try? context.executeFetchRequest(request))?.first as? Quote {
-            quote = existingQuote
-        } else if let newQuote = NSEntityDescription.insertNewObjectForEntityForName("Quote", inManagedObjectContext: context) as? Quote {
-            quote = newQuote
-        }
-        
-        guard let returnedQuote = quote else {
-            return nil
-        }
-        
-        returnedQuote.supplyJSONDictionary(json)
-        
-        do {
-            try context.save()
-        } catch let error {
-            print("Error: Failed to save Quote \(returnedQuote.objectID) to Core Data: \(error)")
-        }
-        
-        return returnedQuote
-    }
-    
-    class func DeleteAllQuotes(inContext context: NSManagedObjectContext) {
-//        let fetchRequest = NSFetchRequest(entityName: "Quote")
-//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-//        
-//        do {
-//            try context.executeRequest(deleteRequest)
-//            try CoreDataManager.persistentStoreCoordinator.executeRequest(deleteRequest, withContext: context)
-//            try context.save()
-//        } catch let error as NSError {
-//            print("Could not clear \(error), \(error.userInfo)")
-//        }
-        
-        do {
-            let fetchRequest = NSFetchRequest(entityName: "Quote")
-            let results = try CoreDataManager.managedObjectContext.executeFetchRequest(fetchRequest) as? [Quote]
-           
-            for obj in results! {
-                CoreDataManager.managedObjectContext.deleteObject(obj)
-            }
-            
-            try CoreDataManager.managedObjectContext.save()
-        } catch let error {
-            print(error)
+            self.owner = UserDataManager.CreateUserWithJSON(ownerInfo, inManagedObjectContext: CoreDataManager.managedObjectContext)
         }
     }
 

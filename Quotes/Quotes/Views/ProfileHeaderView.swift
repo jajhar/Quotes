@@ -15,7 +15,6 @@ protocol ProfileHeaderViewDelegate: class {
 class ProfileHeaderView: View {
 
     // MARK: Outlets
-    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var logOutButton: UIButton!
     
@@ -39,7 +38,7 @@ class ProfileHeaderView: View {
     
     private func syncToUser() {
         // Update the UI here
-        
+        userImageView.sd_setImageWithURL(user?.getUserAvatarURL())
     }
     
 }

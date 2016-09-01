@@ -38,49 +38,4 @@ class User: ModelObject {
         return url
     }
     
-    class func UserWithJSON(json: JSONDictionary, inManagedObjectContext context: NSManagedObjectContext) -> User? {
-        
-        guard let objectId = json["id"] as? String else {
-            print("Warning: json id for user is not a string value")
-            return nil
-        }
-        
-        let request = NSFetchRequest(entityName: "User")
-        request.predicate = NSPredicate(format: "id = %@", objectId)
-        
-        var user: User?
-        
-        if let existingUser = (try? context.executeFetchRequest(request))?.first as? User {
-            user = existingUser
-        } else if let newUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context) as? User {
-            user = newUser
-        }
-        
-        guard let returnedUser = user else {
-            return nil
-        }
-        
-        returnedUser.supplyJSONDictionary(json)
-        
-        do {
-            try context.save()
-        } catch let error {
-            print("Error: Failed to save User \(returnedUser.objectID) to Core Data: \(error)")
-        }
-        
-        return returnedUser
-    }
-    
-    func deleteAllUsers() {
-        let fetchRequest = NSFetchRequest(entityName: "User")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try CoreDataManager.persistentStoreCoordinator.executeRequest(deleteRequest, withContext: CoreDataManager.managedObjectContext)
-        } catch let error as NSError {
-            print("Could not clear \(error), \(error.userInfo)")
-        }
-    }
-
-    
 }

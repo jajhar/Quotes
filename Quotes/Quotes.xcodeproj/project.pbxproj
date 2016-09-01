@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C069F1F1D789F13003FE54C /* UserQuotesPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C069F1E1D789F13003FE54C /* UserQuotesPager.swift */; };
+		8C069F221D78B4BC003FE54C /* CoreDataPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C069F211D78B4BC003FE54C /* CoreDataPager.swift */; };
 		8C2EDDFF1D7134BC00246B01 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2EDDFE1D7134BC00246B01 /* ProfileHeaderView.xib */; };
 		8C2EDE011D713B1F00246B01 /* CreateQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2EDE001D713B1F00246B01 /* CreateQuoteViewController.swift */; };
 		8C442A981D7131CC00E22BE2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A971D7131CC00E22BE2 /* ProfileViewController.swift */; };
@@ -44,7 +46,7 @@
 		8C8ED2591D754FB6008C956E /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8ED2551D754FB6008C956E /* User+CoreDataProperties.swift */; };
 		8C8ED25A1D754FB6008C956E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8ED2561D754FB6008C956E /* User.swift */; };
 		8C8ED25C1D754FB6008C956E /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8ED2581D754FB6008C956E /* Quote.swift */; };
-		8C8ED2611D755497008C956E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8ED2601D755497008C956E /* CoreDataManager.swift */; };
+		8C8ED2611D755497008C956E /* CoreDataManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8ED2601D755497008C956E /* CoreDataManagers.swift */; };
 		8CABD08D1D77F4CB0049AA8D /* ModelObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD08C1D77F4CB0049AA8D /* ModelObject.swift */; };
 		8CD53D3C1D7140BE00697F28 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD53D3B1D7140BE00697F28 /* StringExtensions.swift */; };
 		8CEF470C1D7567090086CDCC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF470B1D7567090086CDCC /* SearchView.swift */; };
@@ -71,6 +73,8 @@
 		5136E5895C2FAA163843F3B1 /* Pods_QuotesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuotesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71DDAC07746558B987C29C6D /* Pods_Quotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B88177C50BAA9B14191CF6F /* Pods-Quotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quotes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Quotes/Pods-Quotes.release.xcconfig"; sourceTree = "<group>"; };
+		8C069F1E1D789F13003FE54C /* UserQuotesPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuotesPager.swift; sourceTree = "<group>"; };
+		8C069F211D78B4BC003FE54C /* CoreDataPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPager.swift; sourceTree = "<group>"; };
 		8C2EDDFE1D7134BC00246B01 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		8C2EDE001D713B1F00246B01 /* CreateQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateQuoteViewController.swift; sourceTree = "<group>"; };
 		8C442A971D7131CC00E22BE2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -112,7 +116,7 @@
 		8C8ED2551D754FB6008C956E /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8C8ED2561D754FB6008C956E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8C8ED2581D754FB6008C956E /* Quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
-		8C8ED2601D755497008C956E /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		8C8ED2601D755497008C956E /* CoreDataManagers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagers.swift; sourceTree = "<group>"; };
 		8CABD08C1D77F4CB0049AA8D /* ModelObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObject.swift; sourceTree = "<group>"; };
 		8CD53D3B1D7140BE00697F28 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		8CEF470B1D7567090086CDCC /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -236,8 +240,10 @@
 		8C5BBF431D7106CF00A8E0A1 /* Pagers */ = {
 			isa = PBXGroup;
 			children = (
-				8C5BBF561D710F8500A8E0A1 /* QuotesPager.swift */,
 				8C5BBF571D710F8500A8E0A1 /* Pager.swift */,
+				8C5BBF561D710F8500A8E0A1 /* QuotesPager.swift */,
+				8C069F1E1D789F13003FE54C /* UserQuotesPager.swift */,
+				8C069F211D78B4BC003FE54C /* CoreDataPager.swift */,
 			);
 			path = Pagers;
 			sourceTree = "<group>";
@@ -280,7 +286,7 @@
 		8C5BBF4C1D71079800A8E0A1 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				8C8ED2601D755497008C956E /* CoreDataManager.swift */,
+				8C8ED2601D755497008C956E /* CoreDataManagers.swift */,
 				8C5BBF471D71073400A8E0A1 /* Quotes.xcdatamodeld */,
 			);
 			name = "Core Data";
@@ -628,6 +634,7 @@
 				8C5BBF761D71220500A8E0A1 /* TableViewCell.swift in Sources */,
 				8CEF47141D7571410086CDCC /* CustomTabBarItem.swift in Sources */,
 				8C5BBF661D7114BC00A8E0A1 /* TabBarController.swift in Sources */,
+				8C069F221D78B4BC003FE54C /* CoreDataPager.swift in Sources */,
 				8C5BBF741D7121DF00A8E0A1 /* QuoteTableViewCell.swift in Sources */,
 				8C8ED2591D754FB6008C956E /* User+CoreDataProperties.swift in Sources */,
 				8CEF470C1D7567090086CDCC /* SearchView.swift in Sources */,
@@ -635,6 +642,7 @@
 				8C5BBF5F1D71119D00A8E0A1 /* AppData.swift in Sources */,
 				8C5BBF581D710F8500A8E0A1 /* QuotesPager.swift in Sources */,
 				8C8ED25C1D754FB6008C956E /* Quote.swift in Sources */,
+				8C069F1F1D789F13003FE54C /* UserQuotesPager.swift in Sources */,
 				8C5BBF6E1D71185600A8E0A1 /* ControllerPresentation.swift in Sources */,
 				8C2EDE011D713B1F00246B01 /* CreateQuoteViewController.swift in Sources */,
 				8C442A9D1D71335200E22BE2 /* ProfileHeaderView.swift in Sources */,
@@ -647,7 +655,7 @@
 				8C5BBF641D7113B800A8E0A1 /* QuotesAPI.swift in Sources */,
 				8C442A981D7131CC00E22BE2 /* ProfileViewController.swift in Sources */,
 				8C5BBF5C1D71108B00A8E0A1 /* APICommunication.swift in Sources */,
-				8C8ED2611D755497008C956E /* CoreDataManager.swift in Sources */,
+				8C8ED2611D755497008C956E /* CoreDataManagers.swift in Sources */,
 				8C442A9A1D71326100E22BE2 /* View.swift in Sources */,
 				8CEF47131D7571410086CDCC /* CustomTabBar.swift in Sources */,
 				8C5BBF1D1D71064C00A8E0A1 /* AppDelegate.swift in Sources */,

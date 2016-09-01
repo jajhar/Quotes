@@ -11,14 +11,8 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="254"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dz7-S9-MUW">
-                    <rect key="frame" x="159" y="30" width="82" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rW8-ti-vhq">
-                    <rect key="frame" x="150" y="74" width="100" height="100"/>
+                    <rect key="frame" x="150" y="35" width="100" height="100"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="Ar2-TJ-c3F"/>
@@ -26,24 +20,21 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZM7-N2-Paz">
-                    <rect key="frame" x="172.5" y="204" width="55" height="30"/>
+                    <rect key="frame" x="172.5" y="165" width="55" height="30"/>
                     <state key="normal" title="Log Out"/>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Dz7-S9-MUW" firstAttribute="top" secondItem="dFA-pr-1Qf" secondAttribute="top" constant="30" id="ENY-xI-3NS"/>
+                <constraint firstItem="rW8-ti-vhq" firstAttribute="top" secondItem="dFA-pr-1Qf" secondAttribute="top" constant="35" id="Du5-I8-CsB"/>
                 <constraint firstItem="rW8-ti-vhq" firstAttribute="centerX" secondItem="dFA-pr-1Qf" secondAttribute="centerX" id="Usc-p1-MRs"/>
                 <constraint firstItem="ZM7-N2-Paz" firstAttribute="top" secondItem="rW8-ti-vhq" secondAttribute="bottom" constant="30" id="a5u-Ya-Zmb"/>
                 <constraint firstItem="ZM7-N2-Paz" firstAttribute="centerX" secondItem="dFA-pr-1Qf" secondAttribute="centerX" id="cDx-HI-7nf"/>
-                <constraint firstItem="Dz7-S9-MUW" firstAttribute="centerX" secondItem="dFA-pr-1Qf" secondAttribute="centerX" id="d45-rl-GOJ"/>
-                <constraint firstItem="rW8-ti-vhq" firstAttribute="top" secondItem="Dz7-S9-MUW" secondAttribute="bottom" constant="23.5" id="lCF-9d-TrX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="logOutButton" destination="ZM7-N2-Paz" id="jxd-sN-gbH"/>
                 <outlet property="userImageView" destination="rW8-ti-vhq" id="lNt-ZC-aBg"/>
-                <outlet property="usernameLabel" destination="Dz7-S9-MUW" id="Fz9-uZ-5Kg"/>
             </connections>
             <point key="canvasLocation" x="345" y="174"/>
         </view>

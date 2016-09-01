@@ -14,6 +14,7 @@ class QuotesTableViewController: UITableViewController {
     // MARK: Properties
     var searchBar: UISearchBar = UISearchBar(frame: CGRectZero)
     var searchButton: UIBarButtonItem!
+    var searchTerm: String?
     
     lazy var quotesPager: QuotesPager = {
         return QuotesPager()
@@ -22,7 +23,6 @@ class QuotesTableViewController: UITableViewController {
     lazy var fetchedResultsController: NSFetchedResultsController = {
         // Initialize Fetch Request
         let fetchRequest = NSFetchRequest(entityName: "Quote")
-        
         // Add Sort Descriptors
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -164,6 +164,7 @@ extension QuotesTableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(QuoteTableViewCell.CellIdentifier()) as! QuoteTableViewCell
         cell.quote = fetchedResultsController.objectAtIndexPath(indexPath) as? Quote
+        cell.searchTerm = searchTerm
         return cell
     }
 }
@@ -201,8 +202,9 @@ extension QuotesTableViewController: NSFetchedResultsControllerDelegate {
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         case .Update:
             print("Updated")
-            let cell = tableView.cellForRowAtIndexPath(indexPath!) as! QuoteTableViewCell
-            cell.quote = fetchedResultsController.objectAtIndexPath(indexPath!) as? Quote
+            if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? QuoteTableViewCell {
+                cell.quote = fetchedResultsController.objectAtIndexPath(indexPath!) as? Quote
+            }
         case .Move:
             print("Moved")
         case .Delete:
@@ -220,5 +222,7 @@ extension QuotesTableViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         toggleSearchBar(false)
+        searchTerm = searchBar.text
+        tableView.reloadData()
     }
 }

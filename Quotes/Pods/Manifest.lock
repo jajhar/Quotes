@@ -1,0 +1,29 @@
+PODS:
+  - Alamofire (3.4.1)
+  - ILRemoteSearchBar (0.0.2)
+  - MBProgressHUD (1.0.0)
+  - PureLayout (3.0.2)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
+  - SSKeychain (1.4.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - ILRemoteSearchBar
+  - MBProgressHUD
+  - PureLayout
+  - SDWebImage
+  - SSKeychain
+
+SPEC CHECKSUMS:
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  ILRemoteSearchBar: 068be94d0271f356264377d711f4c693d688a994
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
+
+PODFILE CHECKSUM: 5a95c9ee49b9a303600b69bf5b5cd603f5977509
+
+COCOAPODS: 1.0.1

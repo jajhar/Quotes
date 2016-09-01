@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DPQ-I2-Y4b">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="dFr-Ey-7Di">
+            <objects>
+                <navigationController id="DPQ-I2-Y4b" customClass="NavigationController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="feedIcon" id="y5C-sU-EqS"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fYX-6s-xbl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="yhF-CR-bVT" kind="relationship" relationship="rootViewController" id="ETW-8p-c7R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxn-0U-U0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-970" y="1119"/>
+        </scene>
+        <!--Quotes Table View Controller-->
+        <scene sceneID="GzF-R5-fQz">
+            <objects>
+                <tableViewController storyboardIdentifier="QuotesTableViewController" id="yhF-CR-bVT" customClass="QuotesTableViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nu7-7Z-WfO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="yhF-CR-bVT" id="1j8-Mf-dcc"/>
+                            <outlet property="delegate" destination="yhF-CR-bVT" id="ePT-1V-8IY"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="nSD-wB-2vm"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="869-em-gkZ">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refreshControlActivated:" destination="yhF-CR-bVT" eventType="valueChanged" id="mOz-lS-nQw"/>
+                        </connections>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MPJ-nc-fwG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-970" y="1826"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="feedIcon" width="36" height="28"/>
+    </resources>
+</document>

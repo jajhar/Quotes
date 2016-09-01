@@ -1,0 +1,6 @@
+framework module ILRemoteSearchBar {
+  umbrella header "ILRemoteSearchBar-umbrella.h"
+
+  export *
+  module * { export * }
+}

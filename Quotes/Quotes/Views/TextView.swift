@@ -57,6 +57,9 @@ class TextView: UITextView {
         placeholderLabel.alpha = 0
         placeholderLabel.tag = UI_PLACEHOLDER_LABEL_TAG
         addSubview(placeholderLabel)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TextView.textChanged(_:)),
+                                                         name: UITextViewTextDidChangeNotification, object: nil)
     }
     
     override func removeFromSuperview() {

@@ -11,14 +11,16 @@ import PureLayout
 
 class TabBarController: UITabBarController {
     
-    //MARK: UIController
+    //MARK: Properties
+    var customTabBar: CustomTabBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tabBar.hidden = true
         
         // Setup custom tab bar
-        let customTabBar = CustomTabBar(frame: CGRectZero)
+        customTabBar = CustomTabBar(frame: CGRectZero)
         customTabBar.datasource = self
         customTabBar.delegate = self
         self.view.addSubview(customTabBar)
@@ -37,6 +39,8 @@ class TabBarController: UITabBarController {
         super.viewWillAppear(animated)
         
     }
+    
+    
 }
 
 extension TabBarController: ControllerPresentation {
@@ -80,7 +84,7 @@ extension TabBarController: ControllerPresentation {
         
         return viewController
     }
-
+    
 }
 
 extension TabBarController: CustomTabBarDelegate, CustomTabBarDataSource {
@@ -97,6 +101,14 @@ extension TabBarController: CustomTabBarDelegate, CustomTabBarDataSource {
     // MARK: CustomTabBarDelegate
     
     func didSelectViewController(tabBarView: CustomTabBar, atIndex index: Int) {
-        self.selectedIndex = index
+        
+        if index == 1 {
+            // create quote index, show creation flow
+            performSegueWithIdentifier("CreateQuoteSegue", sender: self)
+            customTabBar.moveSelectorView(toIndex: selectedIndex)
+            return
+        }
+        
+        selectedIndex = index
     }
 }

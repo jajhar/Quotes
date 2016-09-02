@@ -15,11 +15,9 @@ class Quote: ModelObject {
     var rawCreateTimeString: String?
     var convertedDateString: String?
     
-    convenience init(text: String, owner: User?) {
-        let entity = NSEntityDescription()
-        entity.name = "Quote"
+    convenience init(text: String) {
+        let entity = NSEntityDescription.entityForName("Quote", inManagedObjectContext: CoreDataManager.managedObjectContext)!
         self.init(entity: entity, insertIntoManagedObjectContext: nil)
-        self.owner = owner
         self.text = text
     }
     

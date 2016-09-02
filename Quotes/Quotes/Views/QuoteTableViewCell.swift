@@ -89,7 +89,7 @@ class QuoteTableViewCell: TableViewCell {
             return
         }
         
-        quoteLabel.attributedText = NSAttributedString.AttributedStringWithQuotations(quoteText)
+        quoteLabel.attributedText = NSAttributedString.AttributedStringWithQuotations(quoteText, attributes: nil)
     }
     
     private func setupHeardByString() {

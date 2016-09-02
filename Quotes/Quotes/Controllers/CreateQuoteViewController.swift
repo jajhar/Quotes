@@ -41,6 +41,12 @@ class CreateQuoteViewController: ViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.navigationBar.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        textView.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        textView.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,14 +54,22 @@ class CreateQuoteViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ReviewQuoteSegue" {
+            let rqController = segue.destinationViewController as! ReviewQuoteViewController
+            let newQuote = Quote(text: textView.text)
+            rqController.quote = newQuote
+        }
+    }
+    
     // MARK: Interface Actions
     
+    @IBAction func cancelButtonPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func createQuotePressed(sender: UIBarButtonItem) {
-        let newQuote = Quote(text: textView.text, owner: nil)
-        let rqController = AppData.sharedInstance.navigationManager.presentControllerOfType(.ReviewQuote,
-                                                                                            showTabBar: false,
-                                                                                            animated: true) as! ReviewQuoteViewController
-        rqController.quote = newQuote
+        performSegueWithIdentifier("ReviewQuoteSegue", sender: self)
     }
 }
 

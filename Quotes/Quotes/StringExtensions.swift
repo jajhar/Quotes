@@ -10,7 +10,7 @@ import UIKit
 
 extension NSAttributedString {
     
-    class func AttributedStringWithQuotations(string: String) -> NSAttributedString {
+    class func AttributedStringWithQuotations(string: String, attributes: [String: AnyObject]?) -> NSAttributedString {
         
         let leftQuoteAttachment = NSTextAttachment()
         leftQuoteAttachment.image = UIImage(named:"leftQuotions")
@@ -21,7 +21,7 @@ extension NSAttributedString {
         let rightAttachmentString = NSAttributedString(attachment: rightQuoteAttachment)
         
         let quoteString = NSMutableAttributedString(attributedString: leftAttachmentString)
-        let quote = NSAttributedString(string: " " + string + " ")
+        let quote = NSAttributedString(string: " " + string + " ", attributes: attributes)
         quoteString.appendAttributedString(quote)
         quoteString.appendAttributedString(rightAttachmentString)
         

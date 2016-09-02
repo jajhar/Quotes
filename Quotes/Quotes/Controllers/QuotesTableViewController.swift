@@ -20,23 +20,6 @@ class QuotesTableViewController: UITableViewController {
         return QuotesPager()
     }()
     
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest(entityName: "Quote")
-        // Add Sort Descriptors
-        let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        // Initialize Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataManager.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-        
-        // Configure Fetched Results Controller
-        fetchedResultsController.delegate = self
-        
-        return fetchedResultsController
-    }()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,8 +40,6 @@ class QuotesTableViewController: UITableViewController {
         searchBar.showsCancelButton = true
         searchBar.delegate = self
         searchBar.setSearchFieldBackgroundImage(nil, forState: .Normal)
-        
-        fetchData()
         
         // Setup Search Button
         searchButton = UIBarButtonItem(image: UIImage(named: "SearchIcon"), style: .Plain, target: self, action: #selector(QuotesTableViewController.searchButtonPressed(_:)))
@@ -89,14 +70,6 @@ class QuotesTableViewController: UITableViewController {
 //        tableView.reloadData()
 //    }
     
-    func fetchData() {
-        do {
-            try self.fetchedResultsController.performFetch()
-        } catch let error {
-            print("Error fetching feeds locally: \(error)")
-        }
-    }
-    
     func toggleSearchBar(show: Bool) {
         // Animated search bar display/hide
         let fadeTextAnimation = CATransition()
@@ -122,6 +95,8 @@ class QuotesTableViewController: UITableViewController {
             // error checking
             if(error != nil) {
                 print("Error: \(error)")
+            } else {
+                self.tableView.reloadData()
             }
         }
 
@@ -142,7 +117,7 @@ extension QuotesTableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let cnt = fetchedResultsController.fetchedObjects?.count != nil ? fetchedResultsController.fetchedObjects!.count : 0
+        let cnt = quotesPager.elements.count
         
         if !quotesPager.isEndOfPages {
             return cnt + 1
@@ -153,7 +128,7 @@ extension QuotesTableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cnt = fetchedResultsController.fetchedObjects?.count != nil ? fetchedResultsController.fetchedObjects!.count : 0
+        let cnt = quotesPager.elements.count
 
         if indexPath.row >= cnt {
             // loading cell
@@ -163,58 +138,9 @@ extension QuotesTableViewController {
         }
         
         let cell = tableView.dequeueReusableCellWithIdentifier(QuoteTableViewCell.CellIdentifier()) as! QuoteTableViewCell
-        cell.quote = fetchedResultsController.objectAtIndexPath(indexPath) as? Quote
+        cell.quote = quotesPager.elements[indexPath.row] as? Quote
         cell.searchTerm = searchTerm
         return cell
-    }
-}
-
-extension QuotesTableViewController: NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        tableView.beginUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        print("didChangeSection:  ")
-
-        switch type {
-        case .Insert:
-            print("Insert")
-            let sections = NSIndexSet(index: sectionIndex)
-            tableView.insertSections(sections, withRowAnimation: .Fade)
-        case .Update:
-            print("Updated")
-        case .Move:
-            print("Moved")
-        case .Delete:
-            print("Delete")
-            let sections = NSIndexSet(index: sectionIndex)
-            tableView.deleteSections(sections, withRowAnimation: .Fade)
-        }
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        print("didChangeObject:  ")
-        switch type {
-        case .Insert:
-            print("Insert")
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        case .Update:
-            print("Updated")
-            if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? QuoteTableViewCell {
-                cell.quote = fetchedResultsController.objectAtIndexPath(indexPath!) as? Quote
-            }
-        case .Move:
-            print("Moved")
-        case .Delete:
-            print("Delete")
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        }
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        tableView.endUpdates()
     }
 }
 
@@ -222,6 +148,11 @@ extension QuotesTableViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         toggleSearchBar(false)
+        searchTerm = nil
+        tableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchTerm = searchBar.text
         tableView.reloadData()
     }

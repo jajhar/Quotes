@@ -14,7 +14,9 @@ class CreateQuoteViewController: ViewController {
     @IBOutlet weak var textView: TextView!
     
     // MARK: Properties
-    
+    var keyboardToolBar: UIToolbar!
+    var wordCounterItem: UIBarButtonItem!
+    var createQuoteItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,17 @@ class CreateQuoteViewController: ViewController {
         
         textView.placeholder = "Say something..."
         textView.placeholderColor = .whiteColor()
+        textView.delegate = self
         
+        wordCounterItem = UIBarButtonItem(title: "200", style: .Plain, target: nil, action: nil)
+        createQuoteItem = UIBarButtonItem(title: "QUOTE IT", style: .Plain, target: self, action: #selector(CreateQuoteViewController.createQuotePressed(_:)))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        
+        let frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), 50)
+        keyboardToolBar = UIToolbar(frame: frame)
+        keyboardToolBar.items = [wordCounterItem, flexibleSpace, createQuoteItem]
+        keyboardToolBar.sizeToFit()
+        textView.inputAccessoryView = keyboardToolBar
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -36,15 +48,30 @@ class CreateQuoteViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: Interface Actions
+    
+    func createQuotePressed(sender: UIBarButtonItem) {
+        let newQuote = Quote(text: textView.text, owner: nil)
+        let rqController = AppData.sharedInstance.navigationManager.presentControllerOfType(.ReviewQuote,
+                                                                                            showTabBar: false,
+                                                                                            animated: true) as! ReviewQuoteViewController
+        rqController.quote = newQuote
     }
-    */
+}
 
+extension CreateQuoteViewController: UITextViewDelegate {
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        if textView.text.characters.count + text.characters.count > 200 && text.characters.count > 0 {
+            // character limit is 200
+            return false
+        }
+        
+        return true
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        wordCounterItem.title = String(format: "%lu", 200 - textView.text.characters.count)
+    }
 }

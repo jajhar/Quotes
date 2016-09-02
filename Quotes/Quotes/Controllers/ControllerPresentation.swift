@@ -19,4 +19,5 @@ enum ControllerType : String {
     case Quotes = "QuotesViewController"
     case CreateQuote = "CreateQuoteViewController"
     case Profile = "ProfileViewController"
+    case ReviewQuote = "ReviewQuoteViewController"
 }

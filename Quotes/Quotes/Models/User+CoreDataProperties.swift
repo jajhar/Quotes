@@ -15,8 +15,8 @@ import CoreData
 extension User {
 
     @NSManaged var avatarURL: String?
-    @NSManaged var username: String?
     @NSManaged var id: String?
+    @NSManaged var username: String?
     @NSManaged var quotes: NSSet?
 
 }

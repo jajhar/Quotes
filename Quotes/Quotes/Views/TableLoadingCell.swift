@@ -13,6 +13,10 @@ class TableLoadingCell: TableViewCell {
     
     var progressHUD : MBProgressHUD!
     
+    override class func CellIdentifier() -> String {
+        return "TableLoadingCell"
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         

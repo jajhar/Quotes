@@ -28,6 +28,9 @@ class TabBarController: UITabBarController {
         customTabBar.autoSetDimension(.Height, toSize: 70.0)
         customTabBar.layoutIfNeeded()
         customTabBar.setup()
+//        self.view.frame = CGRectMake(0,0,320,460);
+        view.frame = CGRectMake(0, 0, 320, 320)
+        view.clipsToBounds = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -50,6 +53,8 @@ extension TabBarController: ControllerPresentation {
         case .Quotes:
             storyboard = UIStoryboard(name: "QuotesStoryboard", bundle: nil)
         case .CreateQuote:
+            storyboard = UIStoryboard(name: "CreateQuoteStoryboard", bundle: nil)
+        case .ReviewQuote:
             storyboard = UIStoryboard(name: "CreateQuoteStoryboard", bundle: nil)
         case .Profile:
             storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil)

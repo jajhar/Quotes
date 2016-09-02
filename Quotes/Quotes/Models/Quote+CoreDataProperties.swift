@@ -15,9 +15,9 @@ import CoreData
 extension Quote {
 
     @NSManaged var createdAt: NSDate?
+    @NSManaged var id: String?
     @NSManaged var ownerId: String?
     @NSManaged var text: String?
-    @NSManaged var id: String?
     @NSManaged var heardBy: NSSet?
     @NSManaged var owner: User?
 

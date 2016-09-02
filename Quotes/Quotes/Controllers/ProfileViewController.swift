@@ -16,11 +16,17 @@ class ProfileViewController: ViewController {
 
     // MARK: Properties
     var profileHeaderView: ProfileHeaderView!
+    
     var user: User? {
         didSet {
             syncToUser()
         }
     }
+    
+    lazy var quotesPager: UserQuotesPager = {
+        return UserQuotesPager()
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +34,7 @@ class ProfileViewController: ViewController {
         // Setup tableview
         let nib = UINib(nibName: QuoteTableViewCell.NibName(), bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: QuoteTableViewCell.CellIdentifier())
+        tableView.registerClass(TableLoadingCell.self, forCellReuseIdentifier: TableLoadingCell.CellIdentifier())
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
@@ -43,6 +50,7 @@ class ProfileViewController: ViewController {
         }
         
         profileHeaderView.user = user
+        quotesPager.user = user
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -54,6 +62,25 @@ class ProfileViewController: ViewController {
         navigationItem.title = user?.username
     }
     
+    func reloadTableDataSource(clearState clear: Bool) {
+        
+        let block :PagerCompletionBlock = { (newQuotes, error) -> Void in
+//            self.refreshControl?.endRefreshing()
+            
+            // error checking
+            if(error != nil) {
+                print("Error: \(error)")
+            } else {
+                self.tableView.reloadData()
+            }
+        }
+        
+        if(clear) {
+            quotesPager.reloadWithCompletion(block)
+        } else {
+            quotesPager.getNextPageWithCompletion(block)
+        }
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -63,11 +90,29 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        
+        let cnt = quotesPager.elements.count
+        
+        if !quotesPager.isEndOfPages {
+            return cnt + 1
+        }
+        
+        return cnt
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(QuoteTableViewCell.CellIdentifier())!
+        
+        let cnt = quotesPager.elements.count
+        
+        if indexPath.row >= cnt {
+            // loading cell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TableLoadingCell")!
+            reloadTableDataSource(clearState: false)
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(QuoteTableViewCell.CellIdentifier()) as! QuoteTableViewCell
+        cell.quote = quotesPager.elements[indexPath.row] as? Quote
         return cell
     }
 }

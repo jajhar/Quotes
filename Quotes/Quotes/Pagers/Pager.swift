@@ -15,7 +15,9 @@ public class Pager : NSObject {
     public var isEndOfPages : Bool
     private(set) var elements: [AnyObject]
     public var nextPage: String?
-    
+    public var predicate: NSPredicate?
+    public var sortDescriptors: [NSSortDescriptor]?
+
     public override init() {
         
         self.isEndOfPages = false
@@ -44,11 +46,15 @@ public class Pager : NSObject {
                 self.clearStateAndElements()
             }
             
-            completion?(elementArray, error)
+            self.fetchLocalData(completion)
         }
     }
     
-    internal func makeGetRequestWithCompletion(completion: PagerCompletionBlock) {
+    internal func makeGetRequestWithCompletion(completion: PagerCompletionBlock?) {
+        // NOP (Handled by subclasses)
+    }
+    
+    internal func fetchLocalData(completion: PagerCompletionBlock?) {
         // NOP (Handled by subclasses)
     }
     

@@ -26,6 +26,34 @@ struct CoreDataManager {
 
 struct QuotesDataManager {
     
+    typealias QuotesDataManagerCompletionBlock = ([Quote], ErrorType?) -> Void
+
+    static func GetQuotes(inContext context: NSManagedObjectContext, fetchLimit limit: Int?, withPredicate predicate: NSPredicate?, withSortDescriptors sortDescriptors: [NSSortDescriptor]?, completion: QuotesDataManagerCompletionBlock) {
+        
+        // Initialize Fetch Request
+        let fetchRequest = NSFetchRequest(entityName: "Quote")
+        
+        if let limit = limit {
+            fetchRequest.fetchLimit = limit
+        }
+        
+        // Add Sort Descriptors
+        fetchRequest.sortDescriptors = sortDescriptors
+        fetchRequest.predicate = predicate
+        
+        do {
+            if let results = try CoreDataManager.managedObjectContext.executeFetchRequest(fetchRequest) as? [Quote] {
+                completion(results, nil)
+            } else {
+                completion([], nil)
+            }
+
+        } catch let error {
+            print(error)
+            completion([], error)
+        }
+    }
+    
     static func DeleteAllQuotes(inContext context: NSManagedObjectContext) {
         //        let fetchRequest = NSFetchRequest(entityName: "Quote")
         //        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)

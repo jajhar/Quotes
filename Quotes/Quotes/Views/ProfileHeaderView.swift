@@ -38,7 +38,7 @@ class ProfileHeaderView: View {
     
     private func syncToUser() {
         // Update the UI here
+        
         userImageView.sd_setImageWithURL(user?.getUserAvatarURL())
     }
-    
 }

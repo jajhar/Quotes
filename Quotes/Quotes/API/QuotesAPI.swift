@@ -13,17 +13,21 @@ class QuotesAPI: APICommunication {
     
     func getQuotes(withOffset dateOffset: String?, clearState: Bool, completion: ([Quote]) -> Void, failure: FailureBlock) {
         
+        print("sending request: \(URLs.getQuotes(withOffset: dateOffset))")
+        
         super.sendRequestWithURL(URLs.getQuotes(withOffset: dateOffset),
                                  requestType: RequestType.GET,
                                  parameters: nil,
                                  completion: { (json) -> Void in
                                     
                                     guard let responseDict = json as? JSONDictionary else {
+                                        print("ERROR: API Response is not JSON Compatible")
                                         failure(nil, nil)
                                         return
                                     }
                                     
                                     guard let responseArray = responseDict["data"] as? [JSONDictionary] else {
+                                        print("ERROR: API Response missing data key")
                                         failure(nil, nil)
                                         return
                                     }

@@ -9,7 +9,6 @@
 import Foundation
 
 struct LocalSession {
-    var password: String
     var oAuthToken: String
     var localUser: User?
 }

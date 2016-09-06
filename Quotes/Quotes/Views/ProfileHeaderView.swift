@@ -41,4 +41,8 @@ class ProfileHeaderView: View {
         
         userImageView.sd_setImageWithURL(user?.getUserAvatarURL())
     }
+    
+    @IBAction func logOutPressed(sender: UIButton) {
+        AppData.sharedInstance.logOut()
+    }
 }

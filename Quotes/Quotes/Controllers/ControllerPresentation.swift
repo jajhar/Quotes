@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol ControllerPresentation {
-    func presentControllerOfType(type: ControllerType) -> UIViewController
+    func controllerForType(type: ControllerType) -> UIViewController
     func storyboardForControllerType(type: ControllerType) -> UIStoryboard
 }
 

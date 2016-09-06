@@ -16,6 +16,10 @@ public class URLs {
         return NSURL(string: "login", relativeToURL: baseURL)!
     }
     
+    public class func registerUser() -> NSURL {
+        return NSURL(string: "user/profile", relativeToURL: baseURL)!
+    }
+    
     public class func getProfileForUserId(userId: String) -> NSURL {
         
         let url = String(format: "user/%@/profile", userId)

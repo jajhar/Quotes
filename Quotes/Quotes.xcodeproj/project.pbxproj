@@ -13,6 +13,11 @@
 		8C442A981D7131CC00E22BE2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A971D7131CC00E22BE2 /* ProfileViewController.swift */; };
 		8C442A9A1D71326100E22BE2 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A991D71326100E22BE2 /* View.swift */; };
 		8C442A9D1D71335200E22BE2 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A9C1D71335200E22BE2 /* ProfileHeaderView.swift */; };
+		8C4EF5611D7E66EC00F656A5 /* RegisterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EF5601D7E66EC00F656A5 /* RegisterAPI.swift */; };
+		8C4EF5631D7E68FF00F656A5 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EF5621D7E68FF00F656A5 /* LoginAPI.swift */; };
+		8C4EF5661D7E69AF00F656A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EF5651D7E69AF00F656A5 /* LoginViewController.swift */; };
+		8C4EF5681D7E6F4400F656A5 /* TextFieldResignOnMiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EF5671D7E6F4400F656A5 /* TextFieldResignOnMiss.swift */; };
+		8C4EF56A1D7E70AD00F656A5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EF5691D7E70AD00F656A5 /* RegisterViewController.swift */; };
 		8C572CEB1D78E6710052B55E /* ReviewQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C572CEA1D78E6710052B55E /* ReviewQuoteViewController.swift */; };
 		8C5B3C741D7800D0005E53AC /* Quote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5B3C731D7800D0005E53AC /* Quote+CoreDataProperties.swift */; };
 		8C5B3C771D7808B9005E53AC /* TableLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5B3C761D7808B9005E53AC /* TableLoadingCell.swift */; };
@@ -79,6 +84,11 @@
 		8C442A971D7131CC00E22BE2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8C442A991D71326100E22BE2 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = View.swift; path = ../Controllers/View.swift; sourceTree = "<group>"; };
 		8C442A9C1D71335200E22BE2 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		8C4EF5601D7E66EC00F656A5 /* RegisterAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterAPI.swift; sourceTree = "<group>"; };
+		8C4EF5621D7E68FF00F656A5 /* LoginAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
+		8C4EF5651D7E69AF00F656A5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8C4EF5671D7E6F4400F656A5 /* TextFieldResignOnMiss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldResignOnMiss.swift; sourceTree = "<group>"; };
+		8C4EF5691D7E70AD00F656A5 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8C572CEA1D78E6710052B55E /* ReviewQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewQuoteViewController.swift; sourceTree = "<group>"; };
 		8C5B3C731D7800D0005E53AC /* Quote+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Quote+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8C5B3C761D7808B9005E53AC /* TableLoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableLoadingCell.swift; sourceTree = "<group>"; };
@@ -254,6 +264,7 @@
 				8C442A9B1D71327200E22BE2 /* Profile */,
 				8CEF470D1D7567150086CDCC /* Search */,
 				8CEF47151D7582440086CDCC /* TextView.swift */,
+				8C4EF5671D7E6F4400F656A5 /* TextFieldResignOnMiss.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,6 +275,8 @@
 				8C5BBF5B1D71108B00A8E0A1 /* URLs.swift */,
 				8C5BBF5A1D71108B00A8E0A1 /* APICommunication.swift */,
 				8C5BBF631D7113B800A8E0A1 /* QuotesAPI.swift */,
+				8C4EF5601D7E66EC00F656A5 /* RegisterAPI.swift */,
+				8C4EF5621D7E68FF00F656A5 /* LoginAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -313,6 +326,8 @@
 			isa = PBXGroup;
 			children = (
 				8C5BBF201D71064C00A8E0A1 /* LoginStoryboard.storyboard */,
+				8C4EF5651D7E69AF00F656A5 /* LoginViewController.swift */,
+				8C4EF5691D7E70AD00F656A5 /* RegisterViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -631,6 +646,7 @@
 				8C5BBF501D71085900A8E0A1 /* NavigationController.swift in Sources */,
 				8C5B3C741D7800D0005E53AC /* Quote+CoreDataProperties.swift in Sources */,
 				8CABD08D1D77F4CB0049AA8D /* ModelObject.swift in Sources */,
+				8C4EF56A1D7E70AD00F656A5 /* RegisterViewController.swift in Sources */,
 				8C572CEB1D78E6710052B55E /* ReviewQuoteViewController.swift in Sources */,
 				8C5BBF761D71220500A8E0A1 /* TableViewCell.swift in Sources */,
 				8CEF47141D7571410086CDCC /* CustomTabBarItem.swift in Sources */,
@@ -641,20 +657,24 @@
 				8CEF47161D7582440086CDCC /* TextView.swift in Sources */,
 				8C5BBF5F1D71119D00A8E0A1 /* AppData.swift in Sources */,
 				8C5BBF581D710F8500A8E0A1 /* QuotesPager.swift in Sources */,
+				8C4EF5631D7E68FF00F656A5 /* LoginAPI.swift in Sources */,
 				8C8ED25C1D754FB6008C956E /* Quote.swift in Sources */,
 				8C069F1F1D789F13003FE54C /* UserQuotesPager.swift in Sources */,
 				8C5BBF6E1D71185600A8E0A1 /* ControllerPresentation.swift in Sources */,
+				8C4EF5681D7E6F4400F656A5 /* TextFieldResignOnMiss.swift in Sources */,
 				8C2EDE011D713B1F00246B01 /* CreateQuoteViewController.swift in Sources */,
 				8C442A9D1D71335200E22BE2 /* ProfileHeaderView.swift in Sources */,
 				8C5BBF7D1D7125B100A8E0A1 /* UIViewExtensions.swift in Sources */,
 				8C5BBF6A1D7117F600A8E0A1 /* QuotesTableViewController.swift in Sources */,
 				8C5BBF5D1D71108B00A8E0A1 /* URLs.swift in Sources */,
+				8C4EF5661D7E69AF00F656A5 /* LoginViewController.swift in Sources */,
 				8C5BBF591D710F8500A8E0A1 /* Pager.swift in Sources */,
 				8C5BBF621D7111FA00A8E0A1 /* LocalSession.swift in Sources */,
 				8C5BBF4B1D71074D00A8E0A1 /* TouchSensitiveWindow.swift in Sources */,
 				8C5BBF641D7113B800A8E0A1 /* QuotesAPI.swift in Sources */,
 				8C442A981D7131CC00E22BE2 /* ProfileViewController.swift in Sources */,
 				8C5BBF5C1D71108B00A8E0A1 /* APICommunication.swift in Sources */,
+				8C4EF5611D7E66EC00F656A5 /* RegisterAPI.swift in Sources */,
 				8C8ED2611D755497008C956E /* CoreDataManagers.swift in Sources */,
 				8C442A9A1D71326100E22BE2 /* View.swift in Sources */,
 				8CEF47131D7571410086CDCC /* CustomTabBar.swift in Sources */,

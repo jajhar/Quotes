@@ -16,8 +16,6 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.tabBar.hidden = true
         
         // Setup custom tab bar
         customTabBar = CustomTabBar(frame: CGRectZero)
@@ -27,12 +25,12 @@ class TabBarController: UITabBarController {
         customTabBar.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: view)
         customTabBar.autoPinEdge(.Left, toEdge: .Left, ofView: view)
         customTabBar.autoPinEdge(.Right, toEdge: .Right, ofView: view)
-        customTabBar.autoSetDimension(.Height, toSize: 70.0)
+        customTabBar.autoSetDimension(.Height, toSize: 55.0)
         customTabBar.layoutIfNeeded()
         customTabBar.setup()
 //        self.view.frame = CGRectMake(0,0,320,460);
-        view.frame = CGRectMake(0, 0, 320, 320)
-        view.clipsToBounds = true
+//        view.frame = CGRectMake(0, 0, 320, 320)
+//        view.clipsToBounds = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -67,21 +65,9 @@ extension TabBarController: ControllerPresentation {
         return storyboard
     }
     
-    func presentControllerOfType(type: ControllerType) -> UIViewController {
-        return presentControllerOfType(type, showTabBar: true, animated: true)
-    }
-    
-    func presentControllerOfType(type: ControllerType, showTabBar: Bool, animated: Bool) -> UIViewController {
-        
+    func controllerForType(type: ControllerType) -> UIViewController {
         let storyboard = storyboardForControllerType(type)
         let viewController = storyboard.instantiateViewControllerWithIdentifier(type.rawValue)
-        
-        if let selectedController = self.selectedViewController as? NavigationController {
-            // TODO: Check for duplicate controller before pushing a new one
-            viewController.hidesBottomBarWhenPushed = !showTabBar
-            selectedController.pushViewController(viewController, animated: animated)
-        }
-        
         return viewController
     }
     

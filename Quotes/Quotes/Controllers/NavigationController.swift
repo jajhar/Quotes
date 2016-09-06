@@ -10,19 +10,27 @@ import UIKit
 
 class NavigationController: UINavigationController {
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.navigationBar.barTintColor = UIColor(red: 5.0/255.0, green: 71.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-        self.navigationBar.tintColor = .redColor()
-        self.navigationBar.translucent = true
-        self.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20), NSForegroundColorAttributeName: UIColor.redColor()]
-        self.navigationBar.backgroundColor = .whiteColor()
-        
+
+    }
+    
+    func makeTransparent() {
         // translucent nav bar
-//        self.navigationBar.translucent = true
-//        self.navigationBar.shadowImage = UIImage()
-//        self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationBar.translucent = true
+        navigationBar.shadowImage = UIImage()
+        navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationBar.backgroundColor = .clearColor()
+    }
+    
+    func setTintColor(color: UIColor) {
+        navigationBar.barTintColor = color
+        navigationBar.tintColor = color
+    }
+    
+    func setTitleColor(color: UIColor) {
+        navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20), NSForegroundColorAttributeName: color]
     }
 
     override func didReceiveMemoryWarning() {

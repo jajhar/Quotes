@@ -297,6 +297,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="quoteLabel" destination="tGS-Q0-eIY" id="SWy-f0-Mmp"/>
+                        <outlet property="saidTextField" destination="IDc-ht-Eff" id="St2-Ey-b2T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D5l-qP-JrP" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -136,8 +136,11 @@ class QuoteTableViewCell: TableViewCell {
     // MARK: Interface Actions
     
     @IBAction func UserImageTapped(sender: UIButton) {
-        let controller = AppData.sharedInstance.navigationManager.presentControllerOfType(.Profile) as! ProfileViewController
+        let controller = AppData.sharedInstance.navigationManager.controllerForType(.Profile) as! ProfileViewController
         controller.user = quote?.owner
+        if let navController = AppData.sharedInstance.navigationManager.selectedViewController as? NavigationController {
+            navController.pushViewController(controller, animated: true)
+        }
     }
     
 }

@@ -96,9 +96,7 @@ class LoginViewController: ViewController {
     }
     
     func presentApp() {
-        let storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
-        AppData.sharedInstance.navigationManager = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! TabBarController
-        self.navigationController?.pushViewController(AppData.sharedInstance.navigationManager, animated: true)
+        AppData.sharedInstance.presentApp()
     }
 
 }

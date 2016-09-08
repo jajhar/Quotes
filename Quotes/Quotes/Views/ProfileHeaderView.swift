@@ -54,6 +54,7 @@ class ProfileHeaderView: View {
         
         if user != AppData.sharedInstance.localSession?.localUser {
             optionsContainerView.hidden = true
+            logOutButton.hidden = true
         }
     }
     

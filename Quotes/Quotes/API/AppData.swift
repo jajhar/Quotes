@@ -65,6 +65,21 @@ class AppData {
         
     }
     
+    func presentApp() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+        navigationManager = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! TabBarController
+        navigationManager.view.frame = appDelegate.window!.bounds
+        
+        UIView.transitionWithView(appDelegate.window!,
+                                  duration: 0.5,
+                                  options: .TransitionCrossDissolve,
+                                  animations: { () -> Void in
+                                    appDelegate.window?.rootViewController = self.navigationManager
+            }, completion: nil)
+    }
+    
     func logOut() {
         clearLocalSession()
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -74,10 +89,13 @@ class AppData {
         loginNavController.makeTransparent()
         loginNavController.setTintColor(.whiteColor())
         
-        appDelegate.window?.rootViewController = loginNavController
-//        if let navController = appDelegate.window?.rootViewController as? UINavigationController {
-//            navController.popToRootViewControllerAnimated(true)
-//        }
+        UIView.transitionWithView(appDelegate.window!,
+                                  duration: 0.5,
+                                  options: .TransitionCrossDissolve,
+                                  animations: { () -> Void in
+                                    appDelegate.window?.rootViewController = loginNavController
+            }, completion: nil)
+        
     }
     
 }

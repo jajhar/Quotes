@@ -31,13 +31,13 @@ class TabBarController: UITabBarController {
 //        self.view.frame = CGRectMake(0,0,320,460);
 //        view.frame = CGRectMake(0, 0, 320, 320)
 //        view.clipsToBounds = true
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
     }
-    
     
 }
 
@@ -93,6 +93,13 @@ extension TabBarController: CustomTabBarDelegate, CustomTabBarDataSource {
             performSegueWithIdentifier("CreateQuoteSegue", sender: self)
             customTabBar.moveSelectorView(toIndex: selectedIndex)
             return
+        }
+        
+        if selectedIndex == index {
+            // pop nav stack
+            if let navController = selectedViewController as? UINavigationController {
+                navController.popToRootViewControllerAnimated(true)
+            }
         }
         
         selectedIndex = index

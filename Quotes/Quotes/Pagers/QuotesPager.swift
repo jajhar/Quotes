@@ -34,34 +34,10 @@ class QuotesPager : Pager {
 
     
     override func fetchLocalData(elements: [AnyObject], completion: PagerCompletionBlock?) {
-        
-        guard let elements = elements as? [Quote] else {
-            completion?([], nil)
-            return
-        }
-        
-        if elements.count == 0 {
-            markEndOfpages()
-            completion?([], nil)
-            return
-        }
-        
-        var predicateString = ""
-        var ids = [String]()
-        
-        for i in 0..<elements.count {
-            if let id = elements[i].id {
-                ids.append(id)
                 
-                predicateString += "id = " + "%@"
-                
-                if i < elements.count - 1 {
-                    predicateString += " or "
-                }
-            }
-        }
-        
-        var predicate = NSPredicate(format: predicateString, argumentArray: ids)
+        var predicate = NSPredicate(format: "saidBy = %@ or %@ in heardBy",
+                                    AppData.sharedInstance.localSession!.localUser!,
+                                    AppData.sharedInstance.localSession!.localUser!)
         
         if let date = nextDateOffset {
             let datePredicate = NSPredicate(format: "createdAt < %@", date)

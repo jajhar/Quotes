@@ -51,9 +51,17 @@ class QuotesAPI: APICommunication {
         }
     }
     
-    func getQuotes(forUser user: User, withOffset dateOffset: String?, completion: ([Quote]) -> Void, failure: FailureBlock) {
+    func getQuotes(forUser user: User, withFilter filter: UserQuotesFilter, withOffset dateOffset: String?, completion: ([Quote]) -> Void, failure: FailureBlock) {
         
-        super.sendRequestWithURL(URLs.getQuotes(forUser: user.id!, withOffset: dateOffset),
+        var url: NSURL!
+        
+        if filter == .saidBy {
+            url = URLs.getSaidByQuotes(forUser: user.id!, withOffset: dateOffset)
+        } else {
+            url = URLs.getHeardByQuotes(withOffset: dateOffset)
+        }
+        
+        super.sendRequestWithURL(url,
                                  requestType: RequestType.GET,
                                  parameters: nil,
                                  completion: { (json) -> Void in

@@ -53,17 +53,29 @@ public class URLs {
         return NSURL(string: url, relativeToURL: baseURL)!
     }
     
-    public class func getQuotes(forUser userId: String, withOffset dateOffset: String?) -> NSURL {
+    public class func getSaidByQuotes(forUser userId: String, withOffset dateOffset: String?) -> NSURL {
         
         let url : String
         
         if(dateOffset != nil && dateOffset?.characters.count > 0) {
-            url = String(format: "user/%@/quotes?dateOffset=%@", userId, dateOffset!)
+            url = String(format: "user/%@/quotes/said?dateOffset=%@", userId, dateOffset!)
         } else {
-            url = String(format: "user/%@/quotes", userId)
+            url = String(format: "user/%@/quotes/said", userId)
         }
         
         return NSURL(string: url, relativeToURL: baseURL)!
     }
 
+    public class func getHeardByQuotes(withOffset dateOffset: String?) -> NSURL {
+        
+        let url : String
+        
+        if(dateOffset != nil && dateOffset?.characters.count > 0) {
+            url = String(format: "user/quotes/heard?dateOffset=%@", dateOffset!)
+        } else {
+            url = String(format: "user/quotes/heard")
+        }
+        
+        return NSURL(string: url, relativeToURL: baseURL)!
+    }
 }

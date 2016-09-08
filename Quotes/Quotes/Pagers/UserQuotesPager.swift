@@ -46,7 +46,7 @@ public class UserQuotesPager : Pager {
             return
         }
         
-        api.getQuotes(forUser: user, withOffset: nextAPIPages[filter], completion: { (newQuotes) in            
+        api.getQuotes(forUser: user, withFilter: filter, withOffset: nextAPIPages[filter], completion: { (newQuotes) in
             completion?(newQuotes, nil)
             
         }) { (response, error) in
@@ -61,34 +61,20 @@ public class UserQuotesPager : Pager {
             return
         }
         
-        guard let elements = elements as? [Quote] else {
-            completion?([], nil)
-            return
-        }
+        var predicate: NSPredicate!
         
-        if elements.count == 0 {
-            markEndOfpages()
-            completion?([], nil)
-            return
-        }
-        
-        var predicateString = ""
-        var ids = [String]()
-        
-        for i in 0..<elements.count {
-            if let id = elements[i].id {
-                ids.append(id)
-                
-                predicateString += "id = " + "%@"
-                
-                if i < elements.count - 1 {
-                    predicateString += " or "
-                }
+        if user != AppData.sharedInstance.localSession?.localUser {
+            // not the logged in user
+            predicate = NSPredicate(format: "saidBy = %@ and %@ in heardBy", user, AppData.sharedInstance.localSession!.localUser!)
+        } else {
+            switch filter {
+            case .heardBy:
+                predicate = NSPredicate(format: "%@ in heardBy", user)
+            case .saidBy:
+                predicate = NSPredicate(format: "saidBy = %@", user)
             }
         }
-        
-        var predicate = NSPredicate(format: predicateString, argumentArray: ids)
-        
+       
         if let date = nextDateOffsets[filter]! {
             let datePredicate = NSPredicate(format: "createdAt < %@", date)
             predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, datePredicate])

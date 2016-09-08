@@ -69,9 +69,15 @@ class AppData {
         clearLocalSession()
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        if let navController = appDelegate.window?.rootViewController as? UINavigationController {
-            navController.popToRootViewControllerAnimated(true)
-        }
+        let loginStoryboard = UIStoryboard(name: "LoginStoryboard", bundle: nil)
+        let loginNavController = loginStoryboard.instantiateViewControllerWithIdentifier("LoginNavigationController") as! NavigationController
+        loginNavController.makeTransparent()
+        loginNavController.setTintColor(.whiteColor())
+        
+        appDelegate.window?.rootViewController = loginNavController
+//        if let navController = appDelegate.window?.rootViewController as? UINavigationController {
+//            navController.popToRootViewControllerAnimated(true)
+//        }
     }
     
 }

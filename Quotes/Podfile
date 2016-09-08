@@ -12,7 +12,9 @@ target 'Quotes' do
   pod 'ILRemoteSearchBar'
   pod 'PureLayout'
   pod 'MBProgressHUD'
-
+  pod 'SwiftAddressBook'
+  pod 'MLPAutoCompleteTextField'
+  
   target 'QuotesTests' do
     inherit! :search_paths
     # Pods for testing

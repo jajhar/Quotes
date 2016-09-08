@@ -24,8 +24,13 @@ class NavigationController: UINavigationController {
         navigationBar.backgroundColor = .clearColor()
     }
     
+    func makeOpaque() {
+        navigationBar.shadowImage = nil
+        navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        navigationBar.backgroundColor = nil
+    }
+    
     func setTintColor(color: UIColor) {
-        navigationBar.barTintColor = color
         navigationBar.tintColor = color
     }
     

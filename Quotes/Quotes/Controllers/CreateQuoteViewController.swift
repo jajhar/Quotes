@@ -37,6 +37,16 @@ class CreateQuoteViewController: ViewController {
         keyboardToolBar.sizeToFit()
         textView.inputAccessoryView = keyboardToolBar
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let navigationController = navigationController as? NavigationController {
+            navigationController.setTintColor(.whiteColor())
+            navigationController.setTitleColor(.whiteColor())
+            navigationController.makeTransparent()
+        }
+    }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

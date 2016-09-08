@@ -27,28 +27,26 @@ class Quote: ModelObject {
         if let id = json["id"] as? String {
             self.id = id
             
-//            // Get time created in proper format "n ago"
-//            let index: String.Index = id.startIndex.advancedBy(8) // Swift 2
-//            let objectId:String = id.substringToIndex(index) // "Stack"
-//            var result: UInt64 = 0
-//            let success :Bool = NSScanner(string: objectId).scanHexLongLong(&result)
-//            if success {
-//                let date = NSDate(timeIntervalSince1970: Double(result))
-//                let formatter = NSDateFormatter()
-//                formatter.dateFormat = "MM/dd/yy"
-//                self.convertedDateString = formatter.stringFromDate(date)
-//            }
+            // Get time created in proper format "n ago"
+            let index: String.Index = id.startIndex.advancedBy(8) // Swift 2
+            let objectId:String = id.substringToIndex(index) // "Stack"
+            var result: UInt64 = 0
+            let success :Bool = NSScanner(string: objectId).scanHexLongLong(&result)
+            if success {
+                let date = NSDate(timeIntervalSince1970: Double(result))
+                self.createdAt = date
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "MM/dd/yy"
+                self.convertedDateString = formatter.stringFromDate(date)
+            }
         }
         
         if let text = json["text"] as? String {
             self.text = text
         }
-        
+
         if let createDate = json["createdAt"] as? String {
             self.rawCreateTimeString = createDate
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "M/d/yy"
-            self.createdAt = dateFormatter.dateFromString(createDate)
         }
         
         if let ownerInfo = json["owner"] as? JSONDictionary {
@@ -64,6 +62,13 @@ class Quote: ModelObject {
             }
             heardBy = NSSet(array: users)
         }
+        
+        if let rawUserInfo = json["saidBy"] as? JSONDictionary {
+            if let user = UserDataManager.CreateUserWithJSON(rawUserInfo, inManagedObjectContext: CoreDataManager.managedObjectContext) {
+                saidBy = user
+            }
+        }
+
     }
 
 }

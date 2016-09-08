@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MLPAutoCompleteTextField.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Quotes.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -44,20 +49,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftAddressBook.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>04E807FB09042944B1E4C0747863A0AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>077E8B7386CE4F4764D40DFA28F430C7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2AAB39DAE5C702CE0C109B4D39B3BAA2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2D12D4C614A23005D6457BF36A1D45D0</key>
+		<key>380CD7DB123F43537CDFF9F89EC90CC3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,7 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C2C793F139EC1916B69BBFB4905E701C</key>
+		<key>81CF8292892D02C7E3CF475D8BA0D53D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CAADABED4044FADDEEAC1C8C5940C6EB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,12 +92,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DBADB48FE52E685838757CB2D454350C</key>
+		<key>DBE2F41241ED07C9AD8E09835F49F7BC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E2B9B323D3432C1C41E409C312C2F134</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E867FD7ED2D0EDF0627B2D80FC19CA3C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

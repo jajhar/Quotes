@@ -12,9 +12,9 @@ public typealias PagerCompletionBlock = ([AnyObject], ErrorType?) -> Void
 
 public class Pager : NSObject {
     
-    public var isEndOfPages : Bool
+    private(set) var isEndOfPages : Bool
     private(set) var elements: [AnyObject]
-    public var nextPage: String?
+    internal(set) var nextPage: String?
     public var predicate: NSPredicate?
     public var sortDescriptors: [NSSortDescriptor]?
 
@@ -66,10 +66,6 @@ public class Pager : NSObject {
     
     public func markEndOfpages() {
         isEndOfPages = true
-    }
-    
-    public func isEndOfpages() -> Bool {
-        return isEndOfPages
     }
         
 }

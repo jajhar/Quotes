@@ -1,9 +1,9 @@
 //
 //  Quote+CoreDataProperties.swift
-//  Quotes
+//  
 //
-//  Created by James Ajhar on 9/1/16.
-//  Copyright © 2016 James Ajhar. All rights reserved.
+//  Created by James Ajhar on 9/7/16.
+//
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -20,5 +20,6 @@ extension Quote {
     @NSManaged var text: String?
     @NSManaged var heardBy: NSSet?
     @NSManaged var owner: User?
+    @NSManaged var saidBy: User?
 
 }

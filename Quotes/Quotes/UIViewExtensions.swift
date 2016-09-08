@@ -12,7 +12,7 @@ import PureLayout
 extension UIView {
     
     func constrainToSuperview() {
-        autoPinEdgesToSuperviewMargins()
+        autoPinEdgesToSuperviewEdges()
     }
     
     func makeCircular() {

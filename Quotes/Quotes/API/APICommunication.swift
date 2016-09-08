@@ -59,6 +59,7 @@ class APICommunication: NSObject {
         }
         
         print("REQ: \(url)")
+        print(headers);
         
         Alamofire.request(method, url, parameters: parameters, encoding: ParameterEncoding.JSON, headers: headers)
             .response { request, response, data, error in

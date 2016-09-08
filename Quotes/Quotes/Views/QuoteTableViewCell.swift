@@ -57,7 +57,7 @@ class QuoteTableViewCell: TableViewCell {
     
     private func syncToQuote() {
         
-        dateLabel.text = quote?.rawCreateTimeString
+        dateLabel.text = quote?.convertedDateString
         
         setupUsernameText()
         setupQuotationText()
@@ -124,6 +124,9 @@ class QuoteTableViewCell: TableViewCell {
                                                   attributes: attributes)
             finalText.appendAttributedString(usernameText)
         }
+        
+        
+//        finalText.deleteCharactersInRange(finalText.string.rangeOfComposedCharacterSequenceAtIndex(finalText.length-1))
         
         heardByLabel.attributedText = finalText
     }

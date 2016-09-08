@@ -30,7 +30,7 @@ class ProfileViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         // Setup tableview
         let nib = UINib(nibName: QuoteTableViewCell.NibName(), bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: QuoteTableViewCell.CellIdentifier())
@@ -40,9 +40,11 @@ class ProfileViewController: ViewController {
         
         // Setup header view
         profileHeaderView = ProfileHeaderView.loadFromNib()
+        profileHeaderView.delegate = self
         headerContainerView.addSubview(profileHeaderView)
         profileHeaderView.frame = headerContainerView.bounds
         profileHeaderView.constrainToSuperview()
+        headerContainerView.layoutIfNeeded()
         
         if user == nil {
             // default to the logged in user
@@ -56,6 +58,16 @@ class ProfileViewController: ViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let navigationController = navigationController as? NavigationController {
+            navigationController.setTintColor(.redColor())
+            navigationController.setTitleColor(.redColor())
+            navigationController.makeTransparent()
+        }
     }
     
     private func syncToUser() {
@@ -114,5 +126,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(QuoteTableViewCell.CellIdentifier()) as! QuoteTableViewCell
         cell.quote = quotesPager.elements[indexPath.row] as? Quote
         return cell
+    }
+}
+
+extension ProfileViewController: ProfileHeaderViewDelegate {
+    
+    func saidByPressed(headerView: ProfileHeaderView, button: UIButton) {
+        quotesPager.filter = .saidBy
+        tableView.reloadData()
+    }
+    
+    func heardByPressed(headerView: ProfileHeaderView, button: UIButton) {
+        quotesPager.filter = .heardBy
+        tableView.reloadData()
     }
 }

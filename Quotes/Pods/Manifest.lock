@@ -2,28 +2,34 @@ PODS:
   - Alamofire (3.4.1)
   - ILRemoteSearchBar (0.0.2)
   - MBProgressHUD (1.0.0)
+  - MLPAutoCompleteTextField (1.5)
   - PureLayout (3.0.2)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
   - SSKeychain (1.4.1)
+  - SwiftAddressBook (0.6.2)
 
 DEPENDENCIES:
   - Alamofire
   - ILRemoteSearchBar
   - MBProgressHUD
+  - MLPAutoCompleteTextField
   - PureLayout
   - SDWebImage
   - SSKeychain
+  - SwiftAddressBook
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   ILRemoteSearchBar: 068be94d0271f356264377d711f4c693d688a994
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MLPAutoCompleteTextField: ba4d507bbff2bd4f139d4197814fc8dd39caf77e
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
+  SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
 
-PODFILE CHECKSUM: 5a95c9ee49b9a303600b69bf5b5cd603f5977509
+PODFILE CHECKSUM: b75dd645be5af134b428258517d30c6092284a06
 
 COCOAPODS: 1.0.1

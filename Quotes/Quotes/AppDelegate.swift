@@ -18,18 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = TouchSensitiveWindow.init(frame:UIScreen.mainScreen().bounds)
 
-        let loginStoryboard = UIStoryboard(name: "LoginStoryboard", bundle: nil)
-        let loginNavController = loginStoryboard.instantiateViewControllerWithIdentifier("LoginNavigationController") as! NavigationController
-        loginNavController.makeTransparent()
-        loginNavController.setTintColor(.whiteColor())
-
         if AppData.sharedInstance.restoreLocalSession() {
             // Logged in user info found, continue into app
-            loginNavController.pushViewController(AppData.sharedInstance.navigationManager, animated: false)
+            self.window?.rootViewController = AppData.sharedInstance.navigationManager
+        } else {
+            let loginStoryboard = UIStoryboard(name: "LoginStoryboard", bundle: nil)
+            let loginNavController = loginStoryboard.instantiateViewControllerWithIdentifier("LoginNavigationController") as! NavigationController
+            loginNavController.makeTransparent()
+            loginNavController.setTintColor(.whiteColor())
+            self.window?.rootViewController = loginNavController
         }
-        
-        self.window?.rootViewController = loginNavController
-
         
         return true
     }

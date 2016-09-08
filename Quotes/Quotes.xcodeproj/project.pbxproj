@@ -10,6 +10,7 @@
 		8C069F1F1D789F13003FE54C /* UserQuotesPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C069F1E1D789F13003FE54C /* UserQuotesPager.swift */; };
 		8C2EDDFF1D7134BC00246B01 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2EDDFE1D7134BC00246B01 /* ProfileHeaderView.xib */; };
 		8C2EDE011D713B1F00246B01 /* CreateQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2EDE001D713B1F00246B01 /* CreateQuoteViewController.swift */; };
+		8C33DB4C1D7E95F800FD40D5 /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33DB4B1D7E95F800FD40D5 /* AutoCompleteTextField.swift */; };
 		8C442A981D7131CC00E22BE2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A971D7131CC00E22BE2 /* ProfileViewController.swift */; };
 		8C442A9A1D71326100E22BE2 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A991D71326100E22BE2 /* View.swift */; };
 		8C442A9D1D71335200E22BE2 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A9C1D71335200E22BE2 /* ProfileHeaderView.swift */; };
@@ -81,6 +82,7 @@
 		8C069F1E1D789F13003FE54C /* UserQuotesPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuotesPager.swift; sourceTree = "<group>"; };
 		8C2EDDFE1D7134BC00246B01 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		8C2EDE001D713B1F00246B01 /* CreateQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateQuoteViewController.swift; sourceTree = "<group>"; };
+		8C33DB4B1D7E95F800FD40D5 /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		8C442A971D7131CC00E22BE2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8C442A991D71326100E22BE2 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = View.swift; path = ../Controllers/View.swift; sourceTree = "<group>"; };
 		8C442A9C1D71335200E22BE2 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
@@ -167,6 +169,16 @@
 				94C0E4F3A8C3ACB994B99F19 /* Pods-QuotesTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8C33DB4D1D7E95FB00FD40D5 /* Input Views */ = {
+			isa = PBXGroup;
+			children = (
+				8CEF47151D7582440086CDCC /* TextView.swift */,
+				8C4EF5671D7E6F4400F656A5 /* TextFieldResignOnMiss.swift */,
+				8C33DB4B1D7E95F800FD40D5 /* AutoCompleteTextField.swift */,
+			);
+			name = "Input Views";
 			sourceTree = "<group>";
 		};
 		8C442A9B1D71327200E22BE2 /* Profile */ = {
@@ -263,8 +275,7 @@
 				8C442A991D71326100E22BE2 /* View.swift */,
 				8C442A9B1D71327200E22BE2 /* Profile */,
 				8CEF470D1D7567150086CDCC /* Search */,
-				8CEF47151D7582440086CDCC /* TextView.swift */,
-				8C4EF5671D7E6F4400F656A5 /* TextFieldResignOnMiss.swift */,
+				8C33DB4D1D7E95FB00FD40D5 /* Input Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -645,6 +656,7 @@
 				8C5BBF491D71073400A8E0A1 /* Quotes.xcdatamodeld in Sources */,
 				8C5BBF501D71085900A8E0A1 /* NavigationController.swift in Sources */,
 				8C5B3C741D7800D0005E53AC /* Quote+CoreDataProperties.swift in Sources */,
+				8C33DB4C1D7E95F800FD40D5 /* AutoCompleteTextField.swift in Sources */,
 				8CABD08D1D77F4CB0049AA8D /* ModelObject.swift in Sources */,
 				8C4EF56A1D7E70AD00F656A5 /* RegisterViewController.swift in Sources */,
 				8C572CEB1D78E6710052B55E /* ReviewQuoteViewController.swift in Sources */,

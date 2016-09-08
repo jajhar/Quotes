@@ -8,21 +8,36 @@
 
 import Foundation
 
-class UserQuotesPager : Pager {
+enum UserQuotesFilter {
+    case saidBy
+    case heardBy
+}
+
+public class UserQuotesPager : Pager {
     
     private let api = QuotesAPI()
     
-    private var quotes: [Quote] = [Quote]()
     private var clearState: Bool = true
+    private var quotes: [UserQuotesFilter: [Quote]] = [.saidBy: [], .heardBy: []]
+    var endOfPagesDict: [UserQuotesFilter: Bool] = [.saidBy: false, .heardBy: false]
+    private var nextDateOffsets: [UserQuotesFilter: NSDate?] = [.saidBy: nil, .heardBy: nil]
+    private var nextAPIPages: [UserQuotesFilter: String] = [.saidBy: "", .heardBy: ""]
+    var filter: UserQuotesFilter = .saidBy
+    var user: User?
+    
     override var elements: [AnyObject] {
         get {
-            return quotes
+            return quotes[filter]!
         }
     }
-    var user: User?
-    var nextDateOffset: NSDate?
+    
+    override var isEndOfPages: Bool {
+        get {
+            return endOfPagesDict[filter]!
+        }
+    }
 
-    override func reloadWithCompletion(completion: PagerCompletionBlock?) {
+    override public func reloadWithCompletion(completion: PagerCompletionBlock?) {
         clearState = true
         super.reloadWithCompletion(completion)
     }
@@ -37,7 +52,7 @@ class UserQuotesPager : Pager {
             return
         }
         
-        api.getQuotes(forUser: user, withOffset: nextPage, clearState: clearState, completion: { (newQuotes) in
+        api.getQuotes(forUser: user, withOffset: nextAPIPages[filter], clearState: clearState, completion: { (newQuotes) in
             self.clearState = false
             
             completion?(newQuotes, nil)
@@ -49,17 +64,37 @@ class UserQuotesPager : Pager {
     }
     
     override func fetchLocalData(completion: PagerCompletionBlock?) {
-        guard let userId = user?.id else {
+        guard let user = user else {
             completion?([], nil)
             return
         }
         
-        let datePredicate: NSPredicate? = self.nextDateOffset != nil ? NSPredicate(format: "ownerId = %@ and createdAt < %@", userId, self.nextDateOffset!) : nil
+        var predicate: NSPredicate!
+        
+        if user != AppData.sharedInstance.localSession?.localUser {
+            // not the logged in user
+            predicate = NSPredicate(format: "saidBy = %@ and %@ in heardBy", user, AppData.sharedInstance.localSession!.localUser!)
+        } else {
+            switch filter {
+            case .heardBy:
+                predicate = NSPredicate(format: "%@ in heardBy", user)
+            case .saidBy:
+                predicate = NSPredicate(format: "saidBy = %@", user)
+            }
+        }
+       
+        if let date = nextDateOffsets[filter]! {
+            let datePredicate = NSPredicate(format: "createdAt < %@", date)
+            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, datePredicate])
+        }
+        
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: false)
+        
+        let blockFilter = self.filter
         
         QuotesDataManager.GetQuotes(inContext: CoreDataManager.managedObjectContext,
                                     fetchLimit: 5,
-                                    withPredicate: datePredicate,
+                                    withPredicate: predicate,
                                     withSortDescriptors: [sortDescriptor]) { (newQuotes, error) in
                                         
                                         if let error = error {
@@ -73,11 +108,11 @@ class UserQuotesPager : Pager {
                                             
                                         } else {
                                             
-                                            self.quotes.appendContentsOf(newQuotes)
+                                            self.quotes[blockFilter]!.appendContentsOf(newQuotes)
                                             
                                             // save next page offset
                                             if let quote = newQuotes.last {
-                                                self.nextDateOffset = quote.createdAt
+                                                self.nextDateOffsets[blockFilter] = quote.createdAt
                                                 self.nextPage = quote.rawCreateTimeString
                                             }
                                         }
@@ -86,14 +121,15 @@ class UserQuotesPager : Pager {
         }
     }
     
-    override func clearStateAndElements() {
+    override public func clearStateAndElements() {
         super.clearStateAndElements()
-        quotes.removeAll()
-        self.nextDateOffset = nil
+        quotes[filter]?.removeAll()
+        nextDateOffsets[filter] = nil
+        endOfPagesDict[filter] = false
     }
     
-    override func markEndOfpages() {
+    override public func markEndOfpages() {
         super.markEndOfpages()
-        
+        endOfPagesDict[filter] = true
     }
 }

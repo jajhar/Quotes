@@ -39,14 +39,24 @@ class QuotesPager : Pager {
                 completion?([], error)
         }
     }
+
     
     override func fetchLocalData(completion: PagerCompletionBlock?) {
-        let datePredicate: NSPredicate? = self.nextDateOffset != nil ? NSPredicate(format: "createdAt < %@", self.nextDateOffset!) : nil
+        
+        var predicate = NSPredicate(format: "saidBy = %@ or %@ in heardBy",
+                                    AppData.sharedInstance.localSession!.localUser!,
+                                    AppData.sharedInstance.localSession!.localUser!)
+        
+        if let date = nextDateOffset {
+            let datePredicate = NSPredicate(format: "createdAt < %@", date)
+            predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, datePredicate])
+        }
+        
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: false)
 
         QuotesDataManager.GetQuotes(inContext: CoreDataManager.managedObjectContext,
                                     fetchLimit: 5,
-                                    withPredicate: datePredicate,
+                                    withPredicate: predicate,
                                     withSortDescriptors: [sortDescriptor]) { (newQuotes, error) in
                                         
                                         if let error = error {

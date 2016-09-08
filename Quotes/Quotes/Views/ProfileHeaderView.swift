@@ -50,7 +50,7 @@ class ProfileHeaderView: View {
     private func syncToUser() {
         // Update the UI here
         
-        userImageView.sd_setImageWithURL(user?.getUserAvatarURL())
+        userImageView.sd_setImageWithURL(user?.getUserAvatarURL(), placeholderImage: UIImage(named: "default_avatar"))
         
         if user != AppData.sharedInstance.localSession?.localUser {
             optionsContainerView.hidden = true

@@ -40,6 +40,19 @@ public class URLs {
         return NSURL(string: url, relativeToURL: baseURL)!
     }
     
+    public class func searchQuotes(keyword: String, withOffset dateOffset: String?) -> NSURL {
+        
+        let url : String
+        
+        if(dateOffset != nil && dateOffset?.characters.count > 0) {
+            url = String(format: "search/quotes/%@?dateOffset=%@", keyword, dateOffset!)
+        } else {
+            url = String(format: "search/quotes/%@", keyword)
+        }
+        
+        return NSURL(string: url, relativeToURL: baseURL)!
+    }
+    
     public class func getQuotes(forUser userId: String, withOffset dateOffset: String?) -> NSURL {
         
         let url : String

@@ -8,6 +8,7 @@
         <relationship name="heardBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="quotes" inverseEntity="User" syncable="YES"/>
         <relationship name="saidBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
+        <relationship name="usernameTags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UsernameTag" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="avatarURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,8 +16,12 @@
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="owner" inverseEntity="Quote" syncable="YES"/>
     </entity>
+    <entity name="UsernameTag" representedClassName=".UsernameTags" syncable="YES">
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Quote" positionX="2601" positionY="1265" width="128" height="150"/>
+        <element name="Quote" positionX="2601" positionY="1265" width="128" height="163"/>
         <element name="User" positionX="2860" positionY="1301" width="128" height="105"/>
+        <element name="UsernameTag" positionX="2718" positionY="1524" width="128" height="58"/>
     </elements>
 </model>

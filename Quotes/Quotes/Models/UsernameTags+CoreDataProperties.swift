@@ -1,5 +1,5 @@
 //
-//  User+CoreDataProperties.swift
+//  UsernameTags+CoreDataProperties.swift
 //  Quotes
 //
 //  Created by James Ajhar on 9/7/16.
@@ -12,11 +12,8 @@
 import Foundation
 import CoreData
 
-extension User {
+extension UsernameTags {
 
-    @NSManaged var avatarURL: String?
-    @NSManaged var id: String?
     @NSManaged var username: String?
-    @NSManaged var quotes: NSSet?
 
 }

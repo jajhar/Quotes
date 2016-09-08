@@ -55,6 +55,9 @@
 		8C8ED2611D755497008C956E /* CoreDataManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8ED2601D755497008C956E /* CoreDataManagers.swift */; };
 		8CABD08D1D77F4CB0049AA8D /* ModelObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CABD08C1D77F4CB0049AA8D /* ModelObject.swift */; };
 		8CD53D3C1D7140BE00697F28 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD53D3B1D7140BE00697F28 /* StringExtensions.swift */; };
+		8CEAE6571D81005A00D2DFFD /* SearchPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE6561D81005A00D2DFFD /* SearchPager.swift */; };
+		8CEAE65E1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE65C1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift */; };
+		8CEAE65F1D81091500D2DFFD /* UsernameTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE65D1D81091500D2DFFD /* UsernameTags.swift */; };
 		8CEF470C1D7567090086CDCC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF470B1D7567090086CDCC /* SearchView.swift */; };
 		8CEF470F1D75673A0086CDCC /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CEF470E1D75673A0086CDCC /* SearchView.xib */; };
 		8CEF47131D7571410086CDCC /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF47111D7571410086CDCC /* CustomTabBar.swift */; };
@@ -131,6 +134,9 @@
 		8C8ED2601D755497008C956E /* CoreDataManagers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagers.swift; sourceTree = "<group>"; };
 		8CABD08C1D77F4CB0049AA8D /* ModelObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObject.swift; sourceTree = "<group>"; };
 		8CD53D3B1D7140BE00697F28 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		8CEAE6561D81005A00D2DFFD /* SearchPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPager.swift; sourceTree = "<group>"; };
+		8CEAE65C1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UsernameTags+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8CEAE65D1D81091500D2DFFD /* UsernameTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameTags.swift; sourceTree = "<group>"; };
 		8CEF470B1D7567090086CDCC /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		8CEF470E1D75673A0086CDCC /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
 		8CEF47111D7571410086CDCC /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -265,6 +271,7 @@
 				8C5BBF571D710F8500A8E0A1 /* Pager.swift */,
 				8C5BBF561D710F8500A8E0A1 /* QuotesPager.swift */,
 				8C069F1E1D789F13003FE54C /* UserQuotesPager.swift */,
+				8CEAE6561D81005A00D2DFFD /* SearchPager.swift */,
 			);
 			path = Pagers;
 			sourceTree = "<group>";
@@ -295,6 +302,8 @@
 		8C5BBF461D7106F700A8E0A1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8CEAE65C1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift */,
+				8CEAE65D1D81091500D2DFFD /* UsernameTags.swift */,
 				8CABD08C1D77F4CB0049AA8D /* ModelObject.swift */,
 				8C8ED2551D754FB6008C956E /* User+CoreDataProperties.swift */,
 				8C8ED2561D754FB6008C956E /* User.swift */,
@@ -648,6 +657,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CEAE65F1D81091500D2DFFD /* UsernameTags.swift in Sources */,
 				8C5B3C771D7808B9005E53AC /* TableLoadingCell.swift in Sources */,
 				8C8ED25A1D754FB6008C956E /* User.swift in Sources */,
 				8CD53D3C1D7140BE00697F28 /* StringExtensions.swift in Sources */,
@@ -677,6 +687,7 @@
 				8C2EDE011D713B1F00246B01 /* CreateQuoteViewController.swift in Sources */,
 				8C442A9D1D71335200E22BE2 /* ProfileHeaderView.swift in Sources */,
 				8C5BBF7D1D7125B100A8E0A1 /* UIViewExtensions.swift in Sources */,
+				8CEAE65E1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift in Sources */,
 				8C5BBF6A1D7117F600A8E0A1 /* QuotesTableViewController.swift in Sources */,
 				8C5BBF5D1D71108B00A8E0A1 /* URLs.swift in Sources */,
 				8C4EF5661D7E69AF00F656A5 /* LoginViewController.swift in Sources */,
@@ -685,6 +696,7 @@
 				8C5BBF4B1D71074D00A8E0A1 /* TouchSensitiveWindow.swift in Sources */,
 				8C5BBF641D7113B800A8E0A1 /* QuotesAPI.swift in Sources */,
 				8C442A981D7131CC00E22BE2 /* ProfileViewController.swift in Sources */,
+				8CEAE6571D81005A00D2DFFD /* SearchPager.swift in Sources */,
 				8C5BBF5C1D71108B00A8E0A1 /* APICommunication.swift in Sources */,
 				8C4EF5611D7E66EC00F656A5 /* RegisterAPI.swift in Sources */,
 				8C8ED2611D755497008C956E /* CoreDataManagers.swift in Sources */,

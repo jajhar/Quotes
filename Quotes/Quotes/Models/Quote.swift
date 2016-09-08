@@ -50,13 +50,30 @@ class Quote: ModelObject {
         }
         
         if let ownerInfo = json["owner"] as? JSONDictionary {
-            self.owner = UserDataManager.CreateUserWithJSON(ownerInfo, inManagedObjectContext: CoreDataManager.managedObjectContext)
+            self.owner = UserDataManager.CreateUserWithJSON(ownerInfo,
+                                                            inManagedObjectContext: CoreDataManager.managedObjectContext)
+        }
+        
+        if let rawTags = json["usernameTags"] as? [String] {
+            
+            var tags = [UsernameTags]()
+            
+            for tag in rawTags {
+                if let newTag = UserDataManager.CreateUsernameTagWithString(tag,
+                                                                          inManagedObjectContext: CoreDataManager.managedObjectContext) {
+                    tags.append(newTag)
+                }
+            }
+            
+            usernameTags = NSSet(array: tags)
+
         }
         
         if let heardByArray = json["heardBy"] as? [JSONDictionary] {
             var users = [User]()
             for rawUserInfo in heardByArray {
-                if let user = UserDataManager.CreateUserWithJSON(rawUserInfo, inManagedObjectContext: CoreDataManager.managedObjectContext) {
+                if let user = UserDataManager.CreateUserWithJSON(rawUserInfo,
+                                                                 inManagedObjectContext: CoreDataManager.managedObjectContext) {
                     users.append(user)
                 }
             }
@@ -64,7 +81,8 @@ class Quote: ModelObject {
         }
         
         if let rawUserInfo = json["saidBy"] as? JSONDictionary {
-            if let user = UserDataManager.CreateUserWithJSON(rawUserInfo, inManagedObjectContext: CoreDataManager.managedObjectContext) {
+            if let user = UserDataManager.CreateUserWithJSON(rawUserInfo,
+                                                             inManagedObjectContext: CoreDataManager.managedObjectContext) {
                 saidBy = user
             }
         }

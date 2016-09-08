@@ -149,6 +149,34 @@ struct UserDataManager {
         return returnedUser
     }
     
+    static func CreateUsernameTagWithString(username: String, inManagedObjectContext context: NSManagedObjectContext) -> UsernameTags? {
+        
+        let request = NSFetchRequest(entityName: "UsernameTag")
+        request.predicate = NSPredicate(format: "username = %@", username)
+        
+        var tag: UsernameTags?
+        
+        if let existingTag = (try? context.executeFetchRequest(request))?.first as? UsernameTags {
+            tag = existingTag
+        } else if let newTag = NSEntityDescription.insertNewObjectForEntityForName("UsernameTag", inManagedObjectContext: context) as? UsernameTags {
+            tag = newTag
+        }
+        
+        guard let returnedTag = tag else {
+            return nil
+        }
+        
+        returnedTag.username = username
+
+        do {
+            try context.save()
+        } catch let error {
+            print("Error: Failed to save User \(returnedTag.objectID) to Core Data: \(error)")
+        }
+        
+        return returnedTag
+    }
+    
     static func DeleteAllUsers() {
         let fetchRequest = NSFetchRequest(entityName: "User")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)

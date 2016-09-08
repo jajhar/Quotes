@@ -10,11 +10,11 @@ import UIKit
 
 class RegisterAPI: APICommunication {
     
-    internal func registerUser(username: String, password: String, completion: CompletionBlock, failure: (NSURLResponse?, NSError?, String?) -> Void) {
+    internal func registerUser(username: String, password: String, phoneNumber: Int, completion: CompletionBlock, failure: (NSURLResponse?, NSError?, String?) -> Void) {
         
         super.sendRequestWithURL(URLs.registerUser(),
                                  requestType: RequestType.POST
-            , parameters: ["username": username, "password": password],
+            , parameters: ["username": username, "password": password, "phone": phoneNumber],
               completion: { (json) -> Void in
                 
                 guard let json = json else {

@@ -18,7 +18,8 @@ class RegisterViewController: ViewController {
     // MARK: Outlets
     @IBOutlet weak var usernameTextField: TextFieldResignOnMiss!
     @IBOutlet weak var passwordTextField: TextFieldResignOnMiss!
-    
+    @IBOutlet weak var phoneTextField: TextFieldResignOnMiss!
+
     // MARK: Properties
     var delegate: RegisterViewControllerDelegate?
     
@@ -47,9 +48,19 @@ class RegisterViewController: ViewController {
             return
         }
         
+        if phoneTextField.text == nil || phoneTextField.text!.characters.count < 6 {
+            let alert : UIAlertController = UIAlertController(title: "Error", message: "Phone numbers must be greater than 6 characters.", preferredStyle: .Alert)
+            let dismissAction : UIAlertAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+            alert.addAction(dismissAction)
+            presentViewController(alert, animated:true, completion:nil)
+            return
+        }
+        
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
-        RegisterAPI().registerUser(usernameTextField.text!, password: passwordTextField.text!, completion: { (obj) -> Void in
+        let phone = Int(phoneTextField.text!)!
+        
+        RegisterAPI().registerUser(usernameTextField.text!, password: passwordTextField.text!, phoneNumber: phone, completion: { (obj) -> Void in
             
             MBProgressHUD.hideAllHUDsForView(self.view, animated: false)
             

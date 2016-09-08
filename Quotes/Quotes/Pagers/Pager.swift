@@ -15,8 +15,6 @@ public class Pager : NSObject {
     private(set) var isEndOfPages : Bool
     private(set) var elements: [AnyObject]
     internal(set) var nextPage: String?
-    public var predicate: NSPredicate?
-    public var sortDescriptors: [NSSortDescriptor]?
 
     public override init() {
         
@@ -46,7 +44,7 @@ public class Pager : NSObject {
                 self.clearStateAndElements()
             }
             
-            self.fetchLocalData(completion)
+            self.fetchLocalData(elementArray, completion: completion)
         }
     }
     
@@ -54,7 +52,7 @@ public class Pager : NSObject {
         // NOP (Handled by subclasses)
     }
     
-    internal func fetchLocalData(completion: PagerCompletionBlock?) {
+    internal func fetchLocalData(elements: [AnyObject], completion: PagerCompletionBlock?) {
         // NOP (Handled by subclasses)
     }
     

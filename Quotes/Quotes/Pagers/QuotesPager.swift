@@ -13,26 +13,18 @@ class QuotesPager : Pager {
     private let api = QuotesAPI()
 
     private var quotes: [Quote] = [Quote]()
-    private var clearState: Bool = true
     override var elements: [AnyObject] {
         get {
             return quotes
         }
     }
     var nextDateOffset: NSDate?
-    
-    override func reloadWithCompletion(completion: PagerCompletionBlock?) {
-        clearState = true
-        super.reloadWithCompletion(completion)
-    }
-    
+   
     override func makeGetRequestWithCompletion(completion: PagerCompletionBlock?) {
         super.makeGetRequestWithCompletion(completion)
 
-        api.getQuotes(withOffset: nextPage, clearState: clearState, completion: { (newQuotes) in
-            
-            self.clearState = false
-            
+        api.getQuotes(withOffset: nextPage, completion: { (newQuotes) in
+                        
             completion?(newQuotes, nil)
             
             }) { (response, error) in
@@ -41,11 +33,35 @@ class QuotesPager : Pager {
     }
 
     
-    override func fetchLocalData(completion: PagerCompletionBlock?) {
+    override func fetchLocalData(elements: [AnyObject], completion: PagerCompletionBlock?) {
         
-        var predicate = NSPredicate(format: "saidBy = %@ or %@ in heardBy",
-                                    AppData.sharedInstance.localSession!.localUser!,
-                                    AppData.sharedInstance.localSession!.localUser!)
+        guard let elements = elements as? [Quote] else {
+            completion?([], nil)
+            return
+        }
+        
+        if elements.count == 0 {
+            markEndOfpages()
+            completion?([], nil)
+            return
+        }
+        
+        var predicateString = ""
+        var ids = [String]()
+        
+        for i in 0..<elements.count {
+            if let id = elements[i].id {
+                ids.append(id)
+                
+                predicateString += "id = " + "%@"
+                
+                if i < elements.count - 1 {
+                    predicateString += " or "
+                }
+            }
+        }
+        
+        var predicate = NSPredicate(format: predicateString, argumentArray: ids)
         
         if let date = nextDateOffset {
             let datePredicate = NSPredicate(format: "createdAt < %@", date)
@@ -55,7 +71,7 @@ class QuotesPager : Pager {
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: false)
 
         QuotesDataManager.GetQuotes(inContext: CoreDataManager.managedObjectContext,
-                                    fetchLimit: 5,
+                                    fetchLimit: 20,
                                     withPredicate: predicate,
                                     withSortDescriptors: [sortDescriptor]) { (newQuotes, error) in
                                         

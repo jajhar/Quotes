@@ -37,7 +37,8 @@ class ProfileViewController: ViewController {
         tableView.registerClass(TableLoadingCell.self, forCellReuseIdentifier: TableLoadingCell.CellIdentifier())
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
-        
+        tableView.tableFooterView = UIView(frame: CGRectZero)
+
         // Setup header view
         profileHeaderView = ProfileHeaderView.loadFromNib()
         profileHeaderView.delegate = self

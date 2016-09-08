@@ -73,11 +73,11 @@ class QuoteTableViewCell: TableViewCell {
     }
     
     private func setupUsernameText() {
-        usernameLabel.text = quote?.owner?.username
+        usernameLabel.text = quote?.saidBy?.username
         usernameLabel.textColor = .blackColor()
 
         if let term = searchTerm?.lowercaseString {
-            if quote?.owner?.username?.lowercaseString.rangeOfString(term) == nil {
+            if quote?.saidBy?.username?.lowercaseString.rangeOfString(term) == nil {
                 usernameLabel.textColor = .lightGrayColor()
             }
         }

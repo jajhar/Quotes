@@ -1,65 +1,46 @@
 //
-//  UserQuotesPager.swift
+//  SearchPager.swift
 //  Quotes
 //
-//  Created by James Ajhar on 9/1/16.
+//  Created by James Ajhar on 9/7/16.
 //  Copyright © 2016 James Ajhar. All rights reserved.
 //
 
 import Foundation
 
-enum UserQuotesFilter {
-    case saidBy
-    case heardBy
-}
-
-public class UserQuotesPager : Pager {
+class SearchPager : Pager {
     
     private let api = QuotesAPI()
     
-    private var quotes: [UserQuotesFilter: [Quote]] = [.saidBy: [], .heardBy: []]
-    var endOfPagesDict: [UserQuotesFilter: Bool] = [.saidBy: false, .heardBy: false]
-    private var nextDateOffsets: [UserQuotesFilter: NSDate?] = [.saidBy: nil, .heardBy: nil]
-    private var nextAPIPages: [UserQuotesFilter: String] = [.saidBy: "", .heardBy: ""]
-    var filter: UserQuotesFilter = .saidBy
-    var user: User?
-    
+    private var quotes: [Quote] = [Quote]()
+    var keyword: String?
     override var elements: [AnyObject] {
         get {
-            return quotes[filter]!
+            return quotes
         }
     }
-    
-    override var isEndOfPages: Bool {
-        get {
-            return endOfPagesDict[filter]!
-        }
-    }
+    var nextDateOffset: NSDate?
     
     override func makeGetRequestWithCompletion(completion: PagerCompletionBlock?) {
         super.makeGetRequestWithCompletion(completion)
         
-        guard let user = user else {
-            print("UserQuotesPager: Unable to fetch quotes for nil user")
-            markEndOfpages()
+        guard let keyword = keyword else {
+            print("Warning: Search Pager is missing keyword value")
             completion?([], nil)
             return
         }
         
-        api.getQuotes(forUser: user, withOffset: nextAPIPages[filter], completion: { (newQuotes) in            
+        api.searchQuotes(keyword, withOffset: nextPage, completion: { (newQuotes) in
+                        
             completion?(newQuotes, nil)
             
         }) { (response, error) in
             completion?([], error)
         }
-        
     }
     
+    
     override func fetchLocalData(elements: [AnyObject], completion: PagerCompletionBlock?) {
-        guard let user = user else {
-            completion?([], nil)
-            return
-        }
         
         guard let elements = elements as? [Quote] else {
             completion?([], nil)
@@ -89,14 +70,12 @@ public class UserQuotesPager : Pager {
         
         var predicate = NSPredicate(format: predicateString, argumentArray: ids)
         
-        if let date = nextDateOffsets[filter]! {
+        if let date = nextDateOffset {
             let datePredicate = NSPredicate(format: "createdAt < %@", date)
             predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, datePredicate])
         }
-        
+
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: false)
-        
-        let blockFilter = self.filter
         
         QuotesDataManager.GetQuotes(inContext: CoreDataManager.managedObjectContext,
                                     fetchLimit: 20,
@@ -114,12 +93,12 @@ public class UserQuotesPager : Pager {
                                             
                                         } else {
                                             
-                                            self.quotes[blockFilter]!.appendContentsOf(newQuotes)
+                                            self.quotes.appendContentsOf(newQuotes)
                                             
                                             // save next page offset
                                             if let quote = newQuotes.last {
-                                                self.nextDateOffsets[blockFilter] = quote.createdAt
-                                                self.nextAPIPages[blockFilter] = quote.rawCreateTimeString
+                                                self.nextDateOffset = quote.createdAt
+                                                self.nextPage = quote.rawCreateTimeString
                                             }
                                         }
                                         
@@ -127,15 +106,15 @@ public class UserQuotesPager : Pager {
         }
     }
     
-    override public func clearStateAndElements() {
+    override func clearStateAndElements() {
         super.clearStateAndElements()
-        quotes[filter]?.removeAll()
-        nextDateOffsets[filter] = nil
-        endOfPagesDict[filter] = false
+        quotes.removeAll()
+        self.nextDateOffset = nil
     }
     
-    override public func markEndOfpages() {
+    override func markEndOfpages() {
         super.markEndOfpages()
-        endOfPagesDict[filter] = true
+        
     }
+    
 }

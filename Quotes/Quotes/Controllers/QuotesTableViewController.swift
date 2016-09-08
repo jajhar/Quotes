@@ -20,17 +20,26 @@ class QuotesTableViewController: UITableViewController {
         return QuotesPager()
     }()
     
+    lazy var searchPager: SearchPager = {
+        return SearchPager()
+    }()
+    
+    var activePager: Pager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = "QUOTES"
         
+        activePager = quotesPager
+
         // Setup TableView
         let nib = UINib(nibName: QuoteTableViewCell.NibName(), bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: QuoteTableViewCell.CellIdentifier())
         tableView.registerClass(TableLoadingCell.self, forCellReuseIdentifier: "TableLoadingCell")
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
+        tableView.tableFooterView = UIView(frame: CGRectZero)
         
         // Setup Search Bar
         searchBar.setImage(UIImage(named: "SearchIcon"), forSearchBarIcon: .Search, state: .Normal)
@@ -110,9 +119,9 @@ class QuotesTableViewController: UITableViewController {
         }
 
         if(clear) {
-            quotesPager.reloadWithCompletion(block)
+            activePager.reloadWithCompletion(block)
         } else {
-            quotesPager.getNextPageWithCompletion(block)
+            activePager.getNextPageWithCompletion(block)
         }
     }
 
@@ -126,9 +135,9 @@ extension QuotesTableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let cnt = quotesPager.elements.count
+        let cnt = activePager.elements.count
         
-        if !quotesPager.isEndOfPages {
+        if !activePager.isEndOfPages {
             return cnt + 1
         }
         
@@ -137,7 +146,7 @@ extension QuotesTableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cnt = quotesPager.elements.count
+        let cnt = activePager.elements.count
 
         if indexPath.row >= cnt {
             // loading cell
@@ -147,7 +156,7 @@ extension QuotesTableViewController {
         }
         
         let cell = tableView.dequeueReusableCellWithIdentifier(QuoteTableViewCell.CellIdentifier()) as! QuoteTableViewCell
-        cell.quote = quotesPager.elements[indexPath.row] as? Quote
+        cell.quote = activePager.elements[indexPath.row] as? Quote
         cell.searchTerm = searchTerm
         return cell
     }
@@ -158,11 +167,14 @@ extension QuotesTableViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         toggleSearchBar(false)
         searchTerm = nil
+        activePager = quotesPager
         tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchTerm = searchBar.text
-        tableView.reloadData()
+        searchPager.keyword = searchTerm
+        activePager = searchPager
+        reloadTableDataSource(clearState: true)
     }
 }

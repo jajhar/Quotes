@@ -22,9 +22,8 @@ class LoginViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.usernameTextField.delegate = self
-        self.passwordTextField.delegate = self
-        
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

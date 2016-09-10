@@ -8,11 +8,13 @@
 
 import UIKit
 import CoreData
+import ILRemoteSearchBar
+import MBProgressHUD
 
 class QuotesTableViewController: UITableViewController {
 
     // MARK: Properties
-    var searchBar: UISearchBar = UISearchBar(frame: CGRectZero)
+    var searchBar: ILRemoteSearchBar = ILRemoteSearchBar(frame: CGRectZero)
     var searchButton: UIBarButtonItem!
     var searchTerm: String?
     
@@ -48,6 +50,7 @@ class QuotesTableViewController: UITableViewController {
         searchBar.backgroundColor = .clearColor()
         searchBar.showsCancelButton = true
         searchBar.delegate = self
+        searchBar.timeToWait = 0.8
         searchBar.setSearchFieldBackgroundImage(nil, forState: .Normal)
         
         // Setup Search Button
@@ -68,6 +71,14 @@ class QuotesTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     
+    }
+    
+    func searchWithKeyword(keyword: String) {
+        searchTerm = keyword
+        searchPager.keyword = searchTerm
+        activePager = searchPager
+        MBProgressHUD.showHUDAddedTo(view, animated: true)
+        reloadTableDataSource(clearState: true)
     }
     
     // MARK: Interface Actions
@@ -109,6 +120,7 @@ class QuotesTableViewController: UITableViewController {
         
         let block :PagerCompletionBlock = { (newQuotes, error) -> Void in
             self.refreshControl?.endRefreshing()
+            MBProgressHUD.hideHUDForView(self.view, animated: false)
             
             // error checking
             if(error != nil) {
@@ -172,7 +184,11 @@ extension QuotesTableViewController: QuoteTableViewCellDelegate {
     }
 }
 
-extension QuotesTableViewController: UISearchBarDelegate {
+extension QuotesTableViewController: ILRemoteSearchBarDelegate {
+    
+    func remoteSearchBar(searchBar: ILRemoteSearchBar!, textDidChange searchText: String!) {
+        searchWithKeyword(searchText)
+    }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         toggleSearchBar(false)
@@ -182,9 +198,7 @@ extension QuotesTableViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchTerm = searchBar.text
-        searchPager.keyword = searchTerm
-        activePager = searchPager
-        reloadTableDataSource(clearState: true)
+        guard let text = searchBar.text else { return }
+        searchWithKeyword(text)
     }
 }

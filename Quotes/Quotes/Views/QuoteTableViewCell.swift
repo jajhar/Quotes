@@ -17,10 +17,10 @@ class QuoteTableViewCell: TableViewCell {
     
     // MARK: Outlets
     @IBOutlet weak var userImageButton: UIButton!
-    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var quoteTextView: UITextView!
     @IBOutlet weak var heardByTextView: UITextView!
+    @IBOutlet weak var usernameButton: UIButton!
     
     // MARK: Properties
     var quote: Quote? {
@@ -63,6 +63,9 @@ class QuoteTableViewCell: TableViewCell {
         quoteTextView.removePadding()
         heardByTextView.removePadding()
         
+        // fixe
+        usernameButton.contentEdgeInsets = UIEdgeInsets(top: -1, left: 0, bottom: 0, right: 0)
+        
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(QuoteTableViewCell.textViewTapped(_:)))
         heardByTextView.addGestureRecognizer(tapRecognizer)
 
@@ -86,12 +89,12 @@ class QuoteTableViewCell: TableViewCell {
     }
     
     private func setupUsernameText() {
-        usernameLabel.text = quote?.saidBy?.username
-        usernameLabel.textColor = .blackColor()
+        usernameButton.setTitle(quote?.saidBy?.username, forState: .Normal)
+        usernameButton.setTitleColor(.blackColor(), forState: .Normal)
 
         if let term = searchTerm?.lowercaseString {
             if quote?.saidBy?.username?.lowercaseString.rangeOfString(term) == nil {
-                usernameLabel.textColor = .lightGrayColor()
+                usernameButton.setTitleColor(.lightGrayColor(), forState: .Normal)
             }
         }
     }
@@ -174,6 +177,11 @@ class QuoteTableViewCell: TableViewCell {
     }
 
     // MARK: Interface Actions
+    
+    @IBAction func usernameTapped(sender: UIButton) {
+        guard let saidBy = quote?.saidBy else { return }
+        delegate?.userWasTapped(self, user: saidBy)
+    }
     
     @IBAction func UserImageTapped(sender: UIButton) {
         guard let owner = quote?.owner else { return }

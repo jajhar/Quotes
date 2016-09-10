@@ -45,12 +45,24 @@ class ProfileViewController: ViewController {
         headerContainerView.addSubview(profileHeaderView)
         profileHeaderView.frame = headerContainerView.bounds
         profileHeaderView.constrainToSuperview()
-        headerContainerView.layoutIfNeeded()
         
         if user == nil {
             // default to the logged in user
             user = AppData.sharedInstance.localSession?.localUser
         }
+        
+        var headerframe = headerContainerView.frame
+        headerframe.size.height = 300.0
+
+        if user == AppData.sharedInstance.localSession?.localUser {
+            headerframe.size.height = 300.0
+        } else {
+            headerframe.size.height = 180.0
+            
+        }
+        
+        headerContainerView.frame = headerframe
+        headerContainerView.layoutIfNeeded()
         
         profileHeaderView.user = user
         quotesPager.user = user

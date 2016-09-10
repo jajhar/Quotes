@@ -13,7 +13,11 @@ class SearchPager : Pager {
     private let api = QuotesAPI()
     
     private var quotes: [Quote] = [Quote]()
-    var keyword: String?
+    var keyword: String? {
+        didSet {
+            keyword = keyword?.stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
+        }
+    }
     override var elements: [AnyObject] {
         get {
             return quotes
@@ -42,39 +46,22 @@ class SearchPager : Pager {
     
     override func fetchLocalData(elements: [AnyObject], completion: PagerCompletionBlock?) {
         
-        guard let elements = elements as? [Quote] else {
+        guard let keyword = keyword else {
+            print("Warning: Search Pager is missing keyword value")
             completion?([], nil)
             return
         }
         
-        if elements.count == 0 {
-            markEndOfpages()
-            completion?([], nil)
-            return
-        }
-        
-        var predicateString = ""
-        var ids = [String]()
-        
-        for i in 0..<elements.count {
-            if let id = elements[i].id {
-                ids.append(id)
-                
-                predicateString += "id = " + "%@"
-                
-                if i < elements.count - 1 {
-                    predicateString += " or "
-                }
-            }
-        }
-        
-        var predicate = NSPredicate(format: predicateString, argumentArray: ids)
+        var predicate = NSPredicate(format: "(saidBy = %@ or %@ in heardBy) AND ANY usernameTags.username contains[cd] %@",
+                                    AppData.sharedInstance.localSession!.localUser!,
+                                    AppData.sharedInstance.localSession!.localUser!,
+                                    keyword)
         
         if let date = nextDateOffset {
             let datePredicate = NSPredicate(format: "createdAt < %@", date)
             predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, datePredicate])
         }
-
+        
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: false)
         
         QuotesDataManager.GetQuotes(inContext: CoreDataManager.managedObjectContext,

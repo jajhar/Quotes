@@ -8,28 +8,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuoteCell" rowHeight="143" id="3Fz-fl-uLk" customClass="QuoteTableViewCell" customModule="Quotes" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="418" height="167"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuoteCell" rowHeight="117" id="3Fz-fl-uLk" customClass="QuoteTableViewCell" customModule="Quotes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="418" height="141"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Fz-fl-uLk" id="OEO-nn-EfP">
-                <rect key="frame" x="0.0" y="0.0" width="418" height="166.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="418" height="140.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQp-WD-lsI">
-                        <rect key="frame" x="68" y="13" width="41.5" height="19.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQp-WD-lsI">
+                        <rect key="frame" x="58" y="13" width="41.5" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFY-td-PbB">
-                        <rect key="frame" x="68" y="32.5" width="342" height="87.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Heard By:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWE-gD-qXa">
-                        <rect key="frame" x="68" y="135" width="342" height="19.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -44,34 +32,53 @@
                             <action selector="UserImageTapped:" destination="3Fz-fl-uLk" eventType="touchUpInside" id="Pp8-d7-vbK"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71f-Es-cHc">
-                        <rect key="frame" x="374" y="15" width="35.5" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71f-Es-cHc">
+                        <rect key="frame" x="376.5" y="13" width="33" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EXO-N3-YUr" customClass="TextView" customModule="Quotes" customModuleProvider="target">
+                        <rect key="frame" x="81" y="40.5" width="329" height="51"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftQuotions" translatesAutoresizingMaskIntoConstraints="NO" id="rOy-22-l9R">
+                        <rect key="frame" x="58" y="40" width="20" height="12.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="aLR-Ap-OHU"/>
+                            <constraint firstAttribute="width" constant="20" id="xRD-Cu-IJP"/>
+                        </constraints>
+                    </imageView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="g95-vW-ur2" customClass="TextView" customModule="Quotes" customModuleProvider="target">
+                        <rect key="frame" x="81" y="99.5" width="329" height="33"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="GWE-gD-qXa" secondAttribute="bottom" id="4xx-8P-H98"/>
-                    <constraint firstItem="GWE-gD-qXa" firstAttribute="top" secondItem="CFY-td-PbB" secondAttribute="bottom" constant="15" id="7ru-TI-6SU"/>
+                    <constraint firstItem="g95-vW-ur2" firstAttribute="leading" secondItem="EXO-N3-YUr" secondAttribute="leading" id="BX2-SX-c1t"/>
                     <constraint firstItem="71f-Es-cHc" firstAttribute="top" secondItem="hQp-WD-lsI" secondAttribute="top" id="ETO-RT-E0S"/>
-                    <constraint firstItem="CFY-td-PbB" firstAttribute="trailing" secondItem="71f-Es-cHc" secondAttribute="trailing" id="Eaq-eL-NpE"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="GWE-gD-qXa" secondAttribute="bottom" id="GAV-3a-Qip"/>
-                    <constraint firstItem="GWE-gD-qXa" firstAttribute="leading" secondItem="CFY-td-PbB" secondAttribute="leading" id="Kew-uM-wP4"/>
+                    <constraint firstItem="EXO-N3-YUr" firstAttribute="top" secondItem="rOy-22-l9R" secondAttribute="top" id="Gae-ok-br6"/>
                     <constraint firstItem="hQp-WD-lsI" firstAttribute="top" secondItem="OdO-dR-X1S" secondAttribute="top" id="OBi-Xy-yxB"/>
-                    <constraint firstItem="CFY-td-PbB" firstAttribute="top" secondItem="hQp-WD-lsI" secondAttribute="bottom" id="UK2-AV-I9F"/>
+                    <constraint firstItem="EXO-N3-YUr" firstAttribute="leading" secondItem="rOy-22-l9R" secondAttribute="trailing" constant="3" id="QIh-dc-I5K"/>
+                    <constraint firstItem="EXO-N3-YUr" firstAttribute="trailing" secondItem="71f-Es-cHc" secondAttribute="trailing" id="RXT-oE-0Ne"/>
+                    <constraint firstItem="g95-vW-ur2" firstAttribute="trailing" secondItem="EXO-N3-YUr" secondAttribute="trailing" id="Tfy-MN-Nhi"/>
                     <constraint firstItem="OdO-dR-X1S" firstAttribute="leading" secondItem="OEO-nn-EfP" secondAttribute="leadingMargin" id="cTK-ud-KKJ"/>
                     <constraint firstItem="71f-Es-cHc" firstAttribute="trailing" secondItem="OEO-nn-EfP" secondAttribute="trailingMargin" id="eyj-OC-icg"/>
                     <constraint firstItem="71f-Es-cHc" firstAttribute="trailing" secondItem="OEO-nn-EfP" secondAttribute="trailingMargin" id="iLs-rC-Azt"/>
-                    <constraint firstItem="CFY-td-PbB" firstAttribute="leading" secondItem="hQp-WD-lsI" secondAttribute="leading" id="nId-mO-rNq"/>
+                    <constraint firstItem="rOy-22-l9R" firstAttribute="bottom" secondItem="OdO-dR-X1S" secondAttribute="bottom" id="l91-kZ-xRM"/>
                     <constraint firstItem="71f-Es-cHc" firstAttribute="bottom" secondItem="hQp-WD-lsI" secondAttribute="bottom" id="oIR-dC-GWS"/>
+                    <constraint firstItem="rOy-22-l9R" firstAttribute="leading" secondItem="hQp-WD-lsI" secondAttribute="leading" id="pr0-TF-zhY"/>
                     <constraint firstItem="hQp-WD-lsI" firstAttribute="leading" secondItem="OdO-dR-X1S" secondAttribute="trailing" constant="10" id="sMn-wM-NKW"/>
-                    <constraint firstItem="GWE-gD-qXa" firstAttribute="trailing" secondItem="CFY-td-PbB" secondAttribute="trailing" id="sUW-DF-IXa"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="g95-vW-ur2" secondAttribute="bottom" id="taW-4b-E3c"/>
+                    <constraint firstItem="g95-vW-ur2" firstAttribute="top" secondItem="EXO-N3-YUr" secondAttribute="bottom" constant="8" id="tnn-3a-JSS"/>
                     <constraint firstItem="OdO-dR-X1S" firstAttribute="top" secondItem="OEO-nn-EfP" secondAttribute="topMargin" constant="5" id="wJH-PB-uP3"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
-                        <exclude reference="4xx-8P-H98"/>
                         <exclude reference="iLs-rC-Azt"/>
                         <exclude reference="oIR-dC-GWS"/>
                     </mask>
@@ -79,12 +86,15 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateLabel" destination="71f-Es-cHc" id="go2-cx-hlj"/>
-                <outlet property="heardByLabel" destination="GWE-gD-qXa" id="2ii-4j-LBr"/>
-                <outlet property="quoteLabel" destination="CFY-td-PbB" id="YrL-hF-J1t"/>
+                <outlet property="heardByTextView" destination="g95-vW-ur2" id="gR0-MA-Mhu"/>
+                <outlet property="quoteTextView" destination="EXO-N3-YUr" id="UX7-Ks-WXs"/>
                 <outlet property="userImageButton" destination="OdO-dR-X1S" id="SXu-yw-l2D"/>
                 <outlet property="usernameLabel" destination="hQp-WD-lsI" id="cCg-n9-l75"/>
             </connections>
-            <point key="canvasLocation" x="527" y="277.5"/>
+            <point key="canvasLocation" x="527" y="264.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="leftQuotions" width="18" height="12"/>
+    </resources>
 </document>

@@ -58,6 +58,8 @@
 		8CEAE6571D81005A00D2DFFD /* SearchPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE6561D81005A00D2DFFD /* SearchPager.swift */; };
 		8CEAE65E1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE65C1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift */; };
 		8CEAE65F1D81091500D2DFFD /* UsernameTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE65D1D81091500D2DFFD /* UsernameTags.swift */; };
+		8CEAE6611D826F6900D2DFFD /* UITextViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE6601D826F6900D2DFFD /* UITextViewExtensions.swift */; };
+		8CEAE6651D8285E100D2DFFD /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE6641D8285E100D2DFFD /* Contact.swift */; };
 		8CEF470C1D7567090086CDCC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF470B1D7567090086CDCC /* SearchView.swift */; };
 		8CEF470F1D75673A0086CDCC /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CEF470E1D75673A0086CDCC /* SearchView.xib */; };
 		8CEF47131D7571410086CDCC /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF47111D7571410086CDCC /* CustomTabBar.swift */; };
@@ -137,6 +139,8 @@
 		8CEAE6561D81005A00D2DFFD /* SearchPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPager.swift; sourceTree = "<group>"; };
 		8CEAE65C1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UsernameTags+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8CEAE65D1D81091500D2DFFD /* UsernameTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameTags.swift; sourceTree = "<group>"; };
+		8CEAE6601D826F6900D2DFFD /* UITextViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExtensions.swift; sourceTree = "<group>"; };
+		8CEAE6641D8285E100D2DFFD /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		8CEF470B1D7567090086CDCC /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		8CEF470E1D75673A0086CDCC /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
 		8CEF47111D7571410086CDCC /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 				8C8ED2581D754FB6008C956E /* Quote.swift */,
 				8C5BBF5E1D71119D00A8E0A1 /* AppData.swift */,
 				8C5BBF611D7111FA00A8E0A1 /* LocalSession.swift */,
+				8CEAE6641D8285E100D2DFFD /* Contact.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 				8C5BBF7C1D7125B100A8E0A1 /* UIViewExtensions.swift */,
 				8C5BBF7E1D7125F300A8E0A1 /* DateExtensions.swift */,
 				8CD53D3B1D7140BE00697F28 /* StringExtensions.swift */,
+				8CEAE6601D826F6900D2DFFD /* UITextViewExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -685,6 +691,7 @@
 				8C5BBF6E1D71185600A8E0A1 /* ControllerPresentation.swift in Sources */,
 				8C4EF5681D7E6F4400F656A5 /* TextFieldResignOnMiss.swift in Sources */,
 				8C2EDE011D713B1F00246B01 /* CreateQuoteViewController.swift in Sources */,
+				8CEAE6611D826F6900D2DFFD /* UITextViewExtensions.swift in Sources */,
 				8C442A9D1D71335200E22BE2 /* ProfileHeaderView.swift in Sources */,
 				8C5BBF7D1D7125B100A8E0A1 /* UIViewExtensions.swift in Sources */,
 				8CEAE65E1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift in Sources */,
@@ -692,6 +699,7 @@
 				8C5BBF5D1D71108B00A8E0A1 /* URLs.swift in Sources */,
 				8C4EF5661D7E69AF00F656A5 /* LoginViewController.swift in Sources */,
 				8C5BBF591D710F8500A8E0A1 /* Pager.swift in Sources */,
+				8CEAE6651D8285E100D2DFFD /* Contact.swift in Sources */,
 				8C5BBF621D7111FA00A8E0A1 /* LocalSession.swift in Sources */,
 				8C5BBF4B1D71074D00A8E0A1 /* TouchSensitiveWindow.swift in Sources */,
 				8C5BBF641D7113B800A8E0A1 /* QuotesAPI.swift in Sources */,

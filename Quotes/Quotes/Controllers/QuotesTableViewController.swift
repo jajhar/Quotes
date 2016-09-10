@@ -158,7 +158,17 @@ extension QuotesTableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(QuoteTableViewCell.CellIdentifier()) as! QuoteTableViewCell
         cell.quote = activePager.elements[indexPath.row] as? Quote
         cell.searchTerm = searchTerm
+        cell.delegate = self
         return cell
+    }
+}
+
+extension QuotesTableViewController: QuoteTableViewCellDelegate {
+   
+    func userWasTapped(cell: QuoteTableViewCell, user: User) {
+        let controller = AppData.sharedInstance.navigationManager.controllerForType(.Profile) as! ProfileViewController
+        controller.user = user
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

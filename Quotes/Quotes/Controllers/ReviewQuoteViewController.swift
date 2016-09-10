@@ -24,6 +24,9 @@ class ReviewQuoteViewController: ViewController {
         }
     }
     
+    var saidContact: SwiftAddressBookPerson?
+    var heardContacts: [SwiftAddressBookPerson] = [SwiftAddressBookPerson]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,6 +38,16 @@ class ReviewQuoteViewController: ViewController {
         heardTextField.autoCompleteDelegate = self
         saidTextField.reverseAutoCompleteSuggestionsBoldEffect = true
         heardTextField.reverseAutoCompleteSuggestionsBoldEffect = true
+        
+        saidTextField.delegate = self
+        heardTextField.delegate = self
+        
+        saidTextField.layer.borderWidth = 1
+        saidTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
+        
+        heardTextField.layer.borderWidth = 1
+        heardTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
+
         
 //        let datePickerView:UIDatePicker = UIDatePicker()
 //
@@ -82,6 +95,29 @@ class ReviewQuoteViewController: ViewController {
         })
     }
     
+    func repopulateHeardByField() {
+        heardTextField.text = ""
+        for person in heardContacts {
+            let fname = person.firstName != nil ? person.firstName! : ""
+            let lname = person.lastName != nil ? person.lastName! : ""
+            let fullName = fname + " " + lname
+            heardTextField.text = heardTextField.text! + fullName + ", "
+        }
+    }
+    
+    func repopulateSaidByField() {
+        guard let saidContact = saidContact else {
+            saidTextField.text = ""
+            return
+        }
+        saidTextField.text = ""
+        let fname = saidContact.firstName != nil ? saidContact.firstName! : ""
+        let lname = saidContact.lastName != nil ? saidContact.lastName! : ""
+        let fullName = fname + " " + lname
+        saidTextField.text = saidTextField.text! + fullName
+
+    }
+    
     // MARK: Interface Actions
     
     @IBAction func backButtonPressed(sender: UIBarButtonItem) {
@@ -95,7 +131,30 @@ extension ReviewQuoteViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         if textField == saidTextField {
             requestABAccess()
+        }
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField == saidTextField {
             
+            repopulateSaidByField()
+            
+            if textField.text!.isEmpty {
+                saidTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
+            } else {
+                saidTextField.layer.borderColor = UIColor.redColor().CGColor
+            }
+            
+            
+        } else if textField == heardTextField {
+            
+            repopulateHeardByField()
+            
+            if textField.text!.isEmpty {
+                heardTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
+            } else {
+                heardTextField.layer.borderColor = UIColor.redColor().CGColor
+            }
         }
     }
 }
@@ -104,28 +163,42 @@ extension ReviewQuoteViewController: MLPAutoCompleteTextFieldDelegate, MLPAutoCo
 
     func autoCompleteTextField(textField: MLPAutoCompleteTextField!, possibleCompletionsForString string: String!) -> [AnyObject]! {
         
-        let lastString = string.componentsSeparatedByString(",").last!
+        let lastString = string.componentsSeparatedByString(", ").last!
         
-        var strings = [String]()
+        var contacts = [Contact]()
         
         if let people = swiftAddressBook?.allPeople {
             for person in people {
                 
-                let fname = person.firstName != nil ? person.firstName! : ""
-                let lname = person.lastName != nil ? person.lastName! : ""
-                let fullName = fname + " " + lname
-                
+                let contact = Contact(person: person)
                 let name = lastString.lowercaseString
-                if fullName.lowercaseString.rangeOfString(name) != nil {
-                    strings.append(fullName)
+                
+                if contact.fullName.lowercaseString.rangeOfString(name) != nil {
+                    contacts.append(contact)
                 }
             }
         }
         
-        return strings
+        return contacts
     }
     
     func autoCompleteTextField(textField: MLPAutoCompleteTextField!, didSelectAutoCompleteString selectedString: String!, withAutoCompleteObject selectedObject: MLPAutoCompletionObject!, forRowAtIndexPath indexPath: NSIndexPath!) {
         
+        if textField == heardTextField {
+            
+            guard let contact = selectedObject as? Contact else { return }
+            guard let person = contact.person else { return }
+            
+            if !heardContacts.contains(person) {
+                heardContacts.append(person)
+            }
+            
+            repopulateHeardByField()
+        } else if textField == saidTextField {
+            
+            guard let contact = selectedObject as? Contact else { return }
+            guard let person = contact.person else { return }
+            saidContact = person
+        }
     }
 }

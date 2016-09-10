@@ -126,7 +126,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(QuoteTableViewCell.CellIdentifier()) as! QuoteTableViewCell
         cell.quote = quotesPager.elements[indexPath.row] as? Quote
+        cell.delegate = self
         return cell
+    }
+}
+
+extension ProfileViewController: QuoteTableViewCellDelegate {
+    
+    func userWasTapped(cell: QuoteTableViewCell, user: User) {
+        if user == self.user { return }
+        let controller = AppData.sharedInstance.navigationManager.controllerForType(.Profile) as! ProfileViewController
+        controller.user = user
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

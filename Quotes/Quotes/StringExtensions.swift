@@ -27,4 +27,32 @@ extension NSAttributedString {
         
         return quoteString
     }
+    
+    class func AttributedStringWithRightQuotation(string: String, attributes: [String: AnyObject]?) -> NSAttributedString {
+        
+        let rightQuoteAttachment = NSTextAttachment()
+        rightQuoteAttachment.image = UIImage(named:"rightQuotations")
+        
+        let rightAttachmentString = NSAttributedString(attachment: rightQuoteAttachment)
+        
+        let quoteString = NSMutableAttributedString(string: string + " ", attributes: attributes)
+        quoteString.appendAttributedString(rightAttachmentString)
+        
+        return quoteString
+    }
+    
+    class func AttributedStringWithLeftQuotation(string: String, attributes: [String: AnyObject]?) -> NSAttributedString {
+        
+        let leftQuoteAttachment = NSTextAttachment()
+        leftQuoteAttachment.image = UIImage(named:"leftQuotions")
+        
+        let leftAttachmentString = NSAttributedString(attachment: leftQuoteAttachment)
+        
+        let quoteString = NSMutableAttributedString(attributedString: leftAttachmentString)
+        let quote = NSAttributedString(string: " " + string, attributes: attributes)
+        quoteString.appendAttributedString(quote)
+        
+        return quoteString
+    }
+    
 }

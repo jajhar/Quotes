@@ -9,14 +9,18 @@
 import UIKit
 import SDWebImage
 
+protocol QuoteTableViewCellDelegate {
+    func userWasTapped(cell: QuoteTableViewCell, user: User)
+}
+
 class QuoteTableViewCell: TableViewCell {
     
     // MARK: Outlets
     @IBOutlet weak var userImageButton: UIButton!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var quoteLabel: UILabel!
-    @IBOutlet weak var heardByLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var quoteTextView: UITextView!
+    @IBOutlet weak var heardByTextView: UITextView!
     
     // MARK: Properties
     var quote: Quote? {
@@ -24,6 +28,9 @@ class QuoteTableViewCell: TableViewCell {
             syncToQuote()
         }
     }
+    
+    var delegate: QuoteTableViewCellDelegate?
+    let taggedUserAttributeKey = "TaggedUser"
     
     var searchTerm: String? {
         didSet {
@@ -53,6 +60,12 @@ class QuoteTableViewCell: TableViewCell {
 
         userImageButton.makeCircular()
         userImageButton.imageView?.contentMode = .ScaleAspectFill
+        quoteTextView.removePadding()
+        heardByTextView.removePadding()
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(QuoteTableViewCell.textViewTapped(_:)))
+        heardByTextView.addGestureRecognizer(tapRecognizer)
+
     }
     
     private func syncToQuote() {
@@ -84,35 +97,34 @@ class QuoteTableViewCell: TableViewCell {
     }
     
     private func setupQuotationText() {
-        
-        guard let quoteText = quote?.text else {
-            return
-        }
-        
-        quoteLabel.attributedText = NSAttributedString.AttributedStringWithQuotations(quoteText, attributes: nil)
+        guard let quoteText = quote?.text else { return }
+        quoteTextView.attributedText = NSAttributedString.AttributedStringWithRightQuotation(quoteText, attributes: nil)
     }
     
     private func setupHeardByString() {
         
-        guard let heardBy = quote?.heardBy else {
-            return
-        }
+        guard let heardBy = quote?.heardBy else { return }
         
-        let titleFont = UIFont.systemFontOfSize(15.0)
         let titleColor = UIColor.lightGrayColor()
-        let usernameFont = UIFont.boldSystemFontOfSize(15.0)
+        let usernameFont = UIFont.boldSystemFontOfSize(14.0)
         let usernameColor = UIColor.blackColor()
         let usernameGrayColor = UIColor.lightGrayColor()
 
         // Setup attributed string
         let titleText = NSAttributedString(string: "Heard by: ",
-                                           attributes: [NSFontAttributeName: titleFont, NSForegroundColorAttributeName: titleColor])
+                                           attributes: [NSForegroundColorAttributeName: titleColor])
         
         let finalText = NSMutableAttributedString(attributedString: titleText)
         
         for user in heardBy {
+            
+            guard let user = user as? User else { continue }
+            guard let username = user.username else { continue }
+
             var attributes = [NSFontAttributeName: usernameFont,
-                              NSForegroundColorAttributeName: usernameColor]
+                              NSForegroundColorAttributeName: usernameColor,
+                              taggedUserAttributeKey: user]
+
             
             if let term = searchTerm?.lowercaseString {
                 if user.username?.lowercaseString.rangeOfString(term) == nil {
@@ -120,7 +132,7 @@ class QuoteTableViewCell: TableViewCell {
                 }
             }
             
-            let usernameText = NSAttributedString(string: user.username + ", ",
+            let usernameText = NSAttributedString(string: username + ", ",
                                                   attributes: attributes)
             finalText.appendAttributedString(usernameText)
         }
@@ -128,9 +140,34 @@ class QuoteTableViewCell: TableViewCell {
         
 //        finalText.deleteCharactersInRange(finalText.string.rangeOfComposedCharacterSequenceAtIndex(finalText.length-1))
         
-        heardByLabel.attributedText = finalText
+        heardByTextView.attributedText = finalText
     }
     
+    func textViewTapped(recognizer: UITapGestureRecognizer) {
+        
+        if let textView = recognizer.view as? UITextView {
+            let layoutManager = textView.layoutManager
+            var location: CGPoint = recognizer.locationInView(textView)
+            location.x -= textView.textContainerInset.left
+            location.y -= textView.textContainerInset.top
+            
+            let charIndex = layoutManager.characterIndexForPoint(location,
+                                                                 inTextContainer: textView.textContainer,
+                                                                 fractionOfDistanceBetweenInsertionPoints: nil)
+            
+            if charIndex < textView.textStorage.length {
+                var range = NSRange(location: 0, length: 0)
+                
+                if let userObj = textView.attributedText?.attribute(taggedUserAttributeKey,
+                                                             atIndex: charIndex,
+                                                             effectiveRange: &range) as? User {
+                    delegate?.userWasTapped(self, user: userObj)
+                }
+                
+            }
+        }
+    }
+
     private func updateWithSearchTerm() {
         setupUsernameText()
         setupHeardByString()
@@ -139,11 +176,8 @@ class QuoteTableViewCell: TableViewCell {
     // MARK: Interface Actions
     
     @IBAction func UserImageTapped(sender: UIButton) {
-        let controller = AppData.sharedInstance.navigationManager.controllerForType(.Profile) as! ProfileViewController
-        controller.user = quote?.owner
-        if let navController = AppData.sharedInstance.navigationManager.selectedViewController as? NavigationController {
-            navController.pushViewController(controller, animated: true)
-        }
+        guard let owner = quote?.owner else { return }
+        delegate?.userWasTapped(self, user: owner)
     }
     
 }

@@ -27,8 +27,19 @@ class CreateQuoteViewController: ViewController {
         textView.placeholderColor = .whiteColor()
         textView.delegate = self
         
-        wordCounterItem = UIBarButtonItem(title: "200", style: .Plain, target: nil, action: nil)
-        createQuoteItem = UIBarButtonItem(title: "QUOTE IT", style: .Plain, target: self, action: #selector(CreateQuoteViewController.createQuotePressed(_:)))
+        wordCounterItem = UIBarButtonItem(title: "200",
+                                          style: .Plain,
+                                          target: nil,
+                                          action: nil)
+        
+        createQuoteItem = UIBarButtonItem(title: "QUOTE IT",
+                                          style: .Done,
+                                          target: self,
+                                          action: #selector(CreateQuoteViewController.createQuotePressed(_:)))
+        
+        wordCounterItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.redColor()], forState: .Normal)
+        createQuoteItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.redColor()], forState: .Normal)
+        
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
         
         let frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), 50)

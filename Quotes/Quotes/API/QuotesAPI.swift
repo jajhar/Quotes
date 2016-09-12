@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreData
+import SwiftAddressBook
+
+public let kNotificationQuoteCreated = "NotificationQuoteCreated"
 
 class QuotesAPI: APICommunication {
     
@@ -31,10 +34,6 @@ class QuotesAPI: APICommunication {
                                         failure(nil, nil)
                                         return
                                     }
-                                    
-//                                    if clearState {
-//                                        QuotesDataManager.DeleteAllQuotes(inContext: CoreDataManager.managedObjectContext)
-//                                    }
                                     
                                     var quotes = [Quote]()
                                     for rawQuote in responseArray {
@@ -121,6 +120,66 @@ class QuotesAPI: APICommunication {
                                     
                                     completion(quotes)
                                     
+        }) { (response, error) -> Void in
+            print("ERROR: %@", error)
+            failure(response, error)
+        }
+    }
+
+    
+    func createQuote(text: String, saidBy: SwiftAddressBookPerson, heardBy: [SwiftAddressBookPerson], saidDate: NSDate, completion: (Quote) -> Void, failure: FailureBlock) {
+        
+        let saidByParams: [String: AnyObject] = [
+            "phone": saidBy.phoneNumbersList(),
+            "username": saidBy.fullName()
+        ]
+        
+        var heardByList = [[String: AnyObject]]()
+        for contact in heardBy {
+            let obj: [String: AnyObject] = [
+                "phone": contact.phoneNumbersList(),
+                "username": contact.fullName()
+            ]
+            
+            heardByList.append(obj)
+        }
+        
+        let params: [String: AnyObject] = [
+            "text": text,
+            "saidBy": saidByParams,
+            "heardBy": heardByList,
+            "saidDate": saidDate.timeIntervalSince1970
+        ]
+        
+        print("sending request: \(URLs.createQuote())")
+
+        super.sendRequestWithURL(URLs.createQuote(),
+                                 requestType: .POST
+            , parameters: params,
+              completion: { (json) -> Void in
+                
+                guard let json = json else {
+                    print("Create Quote response json is nil")
+                    failure(nil, nil)
+                    return
+                }
+                
+                guard let rawQuote = json["quote"] as? JSONDictionary else {
+                    print("Create Quote missing quote key in JSON")
+                    failure(nil, nil)
+                    return
+                }
+                
+                guard let quote = QuotesDataManager.CreateQuoteWithJSON(rawQuote, inManagedObjectContext: CoreDataManager.managedObjectContext) else {
+                    print("Failed to create quote from response JSON")
+                    failure(nil, nil)
+                    return
+                }
+                
+                NSNotificationCenter.defaultCenter().postNotificationName(kNotificationQuoteCreated, object: quote)
+                
+                completion(quote)
+                
         }) { (response, error) -> Void in
             print("ERROR: %@", error)
             failure(response, error)

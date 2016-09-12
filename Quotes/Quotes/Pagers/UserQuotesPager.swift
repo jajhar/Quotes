@@ -75,8 +75,9 @@ public class UserQuotesPager : Pager {
             }
         }
        
-        if let date = nextDateOffsets[filter]! {
-            let datePredicate = NSPredicate(format: "createdAt < %@", date)
+        let date = nextDateOffsets[filter]
+        if date != nil && date! != nil {
+            let datePredicate = NSPredicate(format: "createdAt < %@", date!!)
             predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, datePredicate])
         }
         

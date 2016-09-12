@@ -37,8 +37,13 @@ class TextFieldResignOnMiss: UITextField {
     }
     
     func commonInit() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TextFieldResignOnMiss.windowTapNotificationReceived(_:)), name: kQUNotificationWindowTapped, object: nil)
-        addTarget(self, action: #selector(TextFieldResignOnMissDelegate.textFieldDidChange(_:)), forControlEvents: .EditingChanged)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(TextFieldResignOnMiss.windowTapNotificationReceived(_:)),
+                                                         name: kQUNotificationWindowTapped,
+                                                         object: nil)
+        addTarget(self,
+                  action: #selector(TextFieldResignOnMissDelegate.textFieldDidChange(_:)),
+                  forControlEvents: .EditingChanged)
     }
     
     override func removeFromSuperview() {

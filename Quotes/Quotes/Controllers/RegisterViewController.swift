@@ -62,7 +62,7 @@ class RegisterViewController: ViewController {
         
         RegisterAPI().registerUser(usernameTextField.text!, password: passwordTextField.text!, phoneNumber: phone, completion: { (obj) -> Void in
             
-            MBProgressHUD.hideAllHUDsForView(self.view, animated: false)
+            MBProgressHUD.hideHUDForView(self.view, animated: false)
             
             if let user = obj as? User {
                 self.delegate?.registrationFinished(self, user: user)
@@ -78,7 +78,7 @@ class RegisterViewController: ViewController {
             
             }, failure: { (response, error, message) -> Void in
                 
-                MBProgressHUD.hideAllHUDsForView(self.view, animated: false)
+                MBProgressHUD.hideHUDForView(self.view, animated: false)
                 
                 if(error != nil) {
                     print("ERROR: \(error)")

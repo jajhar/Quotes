@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class QuotesPager : Pager {
     
@@ -19,7 +20,7 @@ class QuotesPager : Pager {
         }
     }
     var nextDateOffset: NSDate?
-   
+    
     override func makeGetRequestWithCompletion(completion: PagerCompletionBlock?) {
         super.makeGetRequestWithCompletion(completion)
 

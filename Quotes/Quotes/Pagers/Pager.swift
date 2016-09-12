@@ -28,7 +28,6 @@ public class Pager : NSObject {
     public func reloadWithCompletion(completion: PagerCompletionBlock?) {
         nextPage = nil
         isEndOfPages = false
-        
         makeGetRequestWithCompletion(completion, clearState: true)
     }
     

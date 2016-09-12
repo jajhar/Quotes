@@ -11,9 +11,6 @@ import CoreData
 
 
 class Quote: ModelObject {
-
-    var rawCreateTimeString: String?
-    var convertedDateString: String?
     
     convenience init(text: String) {
         let entity = NSEntityDescription.entityForName("Quote", inManagedObjectContext: CoreDataManager.managedObjectContext)!
@@ -35,9 +32,6 @@ class Quote: ModelObject {
             if success {
                 let date = NSDate(timeIntervalSince1970: Double(result))
                 self.createdAt = date
-                let formatter = NSDateFormatter()
-                formatter.dateFormat = "MM/dd/yy"
-                self.convertedDateString = formatter.stringFromDate(date)
             }
         }
         
@@ -47,6 +41,13 @@ class Quote: ModelObject {
 
         if let createDate = json["createdAt"] as? String {
             self.rawCreateTimeString = createDate
+        }
+        
+        if let rawSaidDate = json["saidDate"] as? Int {
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "MM/dd/yy"
+            let date = NSDate(timeIntervalSince1970: Double(rawSaidDate))
+            convertedDateString = formatter.stringFromDate(date)
         }
         
         if let ownerInfo = json["owner"] as? JSONDictionary {

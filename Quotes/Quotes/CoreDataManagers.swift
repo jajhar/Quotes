@@ -54,31 +54,31 @@ struct QuotesDataManager {
         }
     }
     
-    static func DeleteAllQuotes(inContext context: NSManagedObjectContext) {
-        //        let fetchRequest = NSFetchRequest(entityName: "Quote")
-        //        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        //
-        //        do {
-        //            try context.executeRequest(deleteRequest)
-        //            try CoreDataManager.persistentStoreCoordinator.executeRequest(deleteRequest, withContext: context)
-        //            try context.save()
-        //        } catch let error as NSError {
-        //            print("Could not clear \(error), \(error.userInfo)")
-        //        }
-        
-        do {
-            let fetchRequest = NSFetchRequest(entityName: "Quote")
-            let results = try CoreDataManager.managedObjectContext.executeFetchRequest(fetchRequest) as? [Quote]
-            
-            for obj in results! {
-                CoreDataManager.managedObjectContext.deleteObject(obj)
-            }
-            
-            try CoreDataManager.managedObjectContext.save()
-        } catch let error {
-            print(error)
-        }
-    }
+//    static func DeleteAllQuotes(inContext context: NSManagedObjectContext) {
+////        let fetchRequest = NSFetchRequest(entityName: "Quote")
+////        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+////
+////        do {
+////            try context.executeRequest(deleteRequest)
+////            try CoreDataManager.persistentStoreCoordinator.executeRequest(deleteRequest, withContext: context)
+////            try context.save()
+////        } catch let error as NSError {
+////            print("Could not clear \(error), \(error.userInfo)")
+////        }
+//        
+//        do {
+//            let fetchRequest = NSFetchRequest(entityName: "Quote")
+//            let results = try CoreDataManager.managedObjectContext.executeFetchRequest(fetchRequest) as? [Quote]
+//            
+//            for obj in results! {
+//                CoreDataManager.managedObjectContext.deleteObject(obj)
+//            }
+//            
+//            try CoreDataManager.managedObjectContext.save()
+//        } catch let error {
+//            print(error)
+//        }
+//    }
     
     static func CreateQuoteWithJSON(json: JSONDictionary, inManagedObjectContext context: NSManagedObjectContext) -> Quote? {
         

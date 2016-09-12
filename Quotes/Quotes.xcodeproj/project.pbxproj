@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8C069F1F1D789F13003FE54C /* UserQuotesPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C069F1E1D789F13003FE54C /* UserQuotesPager.swift */; };
+		8C2E16361D865AD90074F8A4 /* ColoredCompletionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E16351D865AD90074F8A4 /* ColoredCompletionTextField.swift */; };
 		8C2EDDFF1D7134BC00246B01 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2EDDFE1D7134BC00246B01 /* ProfileHeaderView.xib */; };
 		8C2EDE011D713B1F00246B01 /* CreateQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2EDE001D713B1F00246B01 /* CreateQuoteViewController.swift */; };
-		8C33DB4C1D7E95F800FD40D5 /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33DB4B1D7E95F800FD40D5 /* AutoCompleteTextField.swift */; };
 		8C442A981D7131CC00E22BE2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A971D7131CC00E22BE2 /* ProfileViewController.swift */; };
 		8C442A9A1D71326100E22BE2 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A991D71326100E22BE2 /* View.swift */; };
 		8C442A9D1D71335200E22BE2 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C442A9C1D71335200E22BE2 /* ProfileHeaderView.swift */; };
@@ -85,9 +85,9 @@
 		71DDAC07746558B987C29C6D /* Pods_Quotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B88177C50BAA9B14191CF6F /* Pods-Quotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quotes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Quotes/Pods-Quotes.release.xcconfig"; sourceTree = "<group>"; };
 		8C069F1E1D789F13003FE54C /* UserQuotesPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuotesPager.swift; sourceTree = "<group>"; };
+		8C2E16351D865AD90074F8A4 /* ColoredCompletionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredCompletionTextField.swift; sourceTree = "<group>"; };
 		8C2EDDFE1D7134BC00246B01 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		8C2EDE001D713B1F00246B01 /* CreateQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateQuoteViewController.swift; sourceTree = "<group>"; };
-		8C33DB4B1D7E95F800FD40D5 /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		8C442A971D7131CC00E22BE2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8C442A991D71326100E22BE2 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = View.swift; path = ../Controllers/View.swift; sourceTree = "<group>"; };
 		8C442A9C1D71335200E22BE2 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 			children = (
 				8CEF47151D7582440086CDCC /* TextView.swift */,
 				8C4EF5671D7E6F4400F656A5 /* TextFieldResignOnMiss.swift */,
-				8C33DB4B1D7E95F800FD40D5 /* AutoCompleteTextField.swift */,
+				8C2E16351D865AD90074F8A4 /* ColoredCompletionTextField.swift */,
 			);
 			name = "Input Views";
 			sourceTree = "<group>";
@@ -672,7 +672,6 @@
 				8C5BBF491D71073400A8E0A1 /* Quotes.xcdatamodeld in Sources */,
 				8C5BBF501D71085900A8E0A1 /* NavigationController.swift in Sources */,
 				8C5B3C741D7800D0005E53AC /* Quote+CoreDataProperties.swift in Sources */,
-				8C33DB4C1D7E95F800FD40D5 /* AutoCompleteTextField.swift in Sources */,
 				8CABD08D1D77F4CB0049AA8D /* ModelObject.swift in Sources */,
 				8C4EF56A1D7E70AD00F656A5 /* RegisterViewController.swift in Sources */,
 				8C572CEB1D78E6710052B55E /* ReviewQuoteViewController.swift in Sources */,
@@ -692,6 +691,7 @@
 				8C4EF5681D7E6F4400F656A5 /* TextFieldResignOnMiss.swift in Sources */,
 				8C2EDE011D713B1F00246B01 /* CreateQuoteViewController.swift in Sources */,
 				8CEAE6611D826F6900D2DFFD /* UITextViewExtensions.swift in Sources */,
+				8C2E16361D865AD90074F8A4 /* ColoredCompletionTextField.swift in Sources */,
 				8C442A9D1D71335200E22BE2 /* ProfileHeaderView.swift in Sources */,
 				8C5BBF7D1D7125B100A8E0A1 /* UIViewExtensions.swift in Sources */,
 				8CEAE65E1D81091500D2DFFD /* UsernameTags+CoreDataProperties.swift in Sources */,

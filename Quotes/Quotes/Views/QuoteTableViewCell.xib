@@ -40,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EXO-N3-YUr" customClass="TextView" customModule="Quotes" customModuleProvider="target">
-                        <rect key="frame" x="81" y="40" width="329.5" height="33"/>
+                        <rect key="frame" x="78" y="37" width="332.5" height="33"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -53,18 +53,18 @@
                         </constraints>
                     </imageView>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="g95-vW-ur2" customClass="TextView" customModule="Quotes" customModuleProvider="target">
-                        <rect key="frame" x="81" y="81.5" width="329.5" height="51"/>
+                        <rect key="frame" x="78" y="78.5" width="332.5" height="54"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zC-ku-pV2">
-                        <rect key="frame" x="55" y="13" width="64" height="20"/>
+                        <rect key="frame" x="55" y="13" width="30" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="AaJ-Xd-YUA"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                        <state key="normal" title="pooooop">
+                        <state key="normal">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>

@@ -66,7 +66,7 @@ class LoginViewController: ViewController {
         
         PKAPILogin().loginUser(usernameTextField.text!, password: passwordTextField.text!, completion: { (obj) -> Void in
             
-            MBProgressHUD.hideAllHUDsForView(self.view, animated: false)
+            MBProgressHUD.hideHUDForView(self.view, animated: false)
             
             if(obj != nil) {
                 
@@ -82,7 +82,7 @@ class LoginViewController: ViewController {
             
         }) { (response, error) -> Void in
             
-            MBProgressHUD.hideAllHUDsForView(self.view, animated: false)
+            MBProgressHUD.hideHUDForView(self.view, animated: false)
             
             if(error != nil) {
                 print("ERROR: ", error)

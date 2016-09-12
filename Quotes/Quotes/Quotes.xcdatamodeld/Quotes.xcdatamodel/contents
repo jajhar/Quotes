@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Automatic">
     <entity name="Quote" representedClassName=".Quote" syncable="YES">
+        <attribute name="convertedDateString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rawCreateTimeString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="heardBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="heard" inverseEntity="User" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="created" inverseEntity="User" syncable="YES"/>
@@ -23,7 +25,7 @@
         <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="usernameTags" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Quote" positionX="2484" positionY="1241" width="128" height="163"/>
+        <element name="Quote" positionX="2484" positionY="1241" width="128" height="193"/>
         <element name="User" positionX="2815" positionY="1269" width="128" height="133"/>
         <element name="UsernameTag" positionX="2707" positionY="1521" width="128" height="73"/>
     </elements>

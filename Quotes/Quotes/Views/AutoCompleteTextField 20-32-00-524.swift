@@ -9,47 +9,48 @@
 import Foundation
 import UIKit
 
-public class AutoCompleteTextField:UITextField {
+class AutoCompleteTextField: TextFieldResignOnMiss {
+    
     /// Manages the instance of tableview
     private var autoCompleteTableView:UITableView?
     /// Holds the collection of attributed strings
     private lazy var attributedAutoCompleteStrings = [NSAttributedString]()
     /// Handles user selection action on autocomplete table view
-    public var onSelect:(String, NSIndexPath)->() = {_,_ in}
+    var onSelect:(String, NSIndexPath)->() = {_,_ in}
     /// Handles textfield's textchanged
-    public var onTextChange:(String)->() = {_ in}
+    var onTextChange:(String)->() = {_ in}
     
     /// Font for the text suggestions
-    public var autoCompleteTextFont = UIFont.systemFontOfSize(12)
+    var autoCompleteTextFont = UIFont.systemFontOfSize(12)
     /// Color of the text suggestions
-    public var autoCompleteTextColor = UIColor.blackColor()
+    var autoCompleteTextColor = UIColor.blackColor()
     /// Used to set the height of cell for each suggestions
-    public var autoCompleteCellHeight:CGFloat = 44.0
+    var autoCompleteCellHeight:CGFloat = 44.0
     /// The maximum visible suggestion
-    public var maximumAutoCompleteCount = 3
+    var maximumAutoCompleteCount = 3
     /// Used to set your own preferred separator inset
-    public var autoCompleteSeparatorInset = UIEdgeInsetsZero
+    var autoCompleteSeparatorInset = UIEdgeInsetsZero
     /// Shows autocomplete text with formatting
-    public var enableAttributedText = false
+    var enableAttributedText = false
     /// User Defined Attributes
-    public var autoCompleteAttributes:[String:AnyObject]?
+    var autoCompleteAttributes:[String:AnyObject]?
     /// Hides autocomplete tableview after selecting a suggestion
-    public var hidesWhenSelected = true
+    var hidesWhenSelected = true
     /// Hides autocomplete tableview when the textfield is empty
-    public var hidesWhenEmpty:Bool?{
+    var hidesWhenEmpty:Bool?{
         didSet{
             assert(hidesWhenEmpty != nil, "hideWhenEmpty cannot be set to nil")
             autoCompleteTableView?.hidden = hidesWhenEmpty!
         }
     }
     /// The table view height
-    public var autoCompleteTableHeight:CGFloat?{
+    var autoCompleteTableHeight:CGFloat?{
         didSet{
             redrawTable()
         }
     }
     /// The strings to be shown on as suggestions, setting the value of this automatically reload the tableview
-    public var autoCompleteStrings:[String]?{
+    var autoCompleteStrings:[String]?{
         didSet{ reload() }
     }
     
@@ -80,13 +81,14 @@ public class AutoCompleteTextField:UITextField {
 //        setupAutocompleteTable(newSuperView)
 //    }
     
-    private func commonInit(){
+    override func commonInit(){
+        super.commonInit()
         hidesWhenEmpty = true
         autoCompleteAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()]
         autoCompleteAttributes![NSFontAttributeName] = UIFont.boldSystemFontOfSize(12)
         self.clearButtonMode = .Always
-        self.addTarget(self, action: "textFieldDidChange", forControlEvents: .EditingChanged)
-        self.addTarget(self, action: "textFieldDidEndEditing", forControlEvents: .EditingDidEnd)
+        self.addTarget(self, action: #selector(AutoCompleteTextField.textFieldChanged), forControlEvents: .EditingChanged)
+        self.addTarget(self, action: #selector(AutoCompleteTextField.textFieldDidEndEditing), forControlEvents: .EditingDidEnd)
     }
     
     func setupAutocompleteTable(view: UIView){
@@ -132,7 +134,7 @@ public class AutoCompleteTextField:UITextField {
         autoCompleteTableView?.reloadData()
     }
     
-    func textFieldDidChange(){
+    func textFieldChanged(){
         guard let _ = text else {
             return
         }
@@ -152,11 +154,11 @@ public class AutoCompleteTextField:UITextField {
 //MARK: - UITableViewDataSource - UITableViewDelegate
 extension AutoCompleteTextField: UITableViewDataSource, UITableViewDelegate {
   
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return autoCompleteStrings != nil ? (autoCompleteStrings!.count > maximumAutoCompleteCount ? maximumAutoCompleteCount : autoCompleteStrings!.count) : 0
     }
     
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "autocompleteCellIdentifier"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
         if cell == nil{
@@ -176,7 +178,7 @@ extension AutoCompleteTextField: UITableViewDataSource, UITableViewDelegate {
         return cell!
     }
     
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         
         if let selectedText = cell?.textLabel?.text {
@@ -189,19 +191,13 @@ extension AutoCompleteTextField: UITableViewDataSource, UITableViewDelegate {
         })
     }
     
-    public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if cell.respondsToSelector("setSeparatorInset:"){
-            cell.separatorInset = autoCompleteSeparatorInset
-        }
-        if cell.respondsToSelector("setPreservesSuperviewLayoutMargins:"){
-            cell.preservesSuperviewLayoutMargins = false
-        }
-        if cell.respondsToSelector("setLayoutMargins:"){
-            cell.layoutMargins = autoCompleteSeparatorInset
-        }
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.separatorInset = autoCompleteSeparatorInset
+        cell.preservesSuperviewLayoutMargins = false
+        cell.layoutMargins = autoCompleteSeparatorInset
     }
     
-    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return autoCompleteCellHeight
     }
 }

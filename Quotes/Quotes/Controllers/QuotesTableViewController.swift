@@ -54,10 +54,24 @@ class QuotesTableViewController: UITableViewController {
         searchBar.setSearchFieldBackgroundImage(nil, forState: .Normal)
         
         // Setup Search Button
-        searchButton = UIBarButtonItem(image: UIImage(named: "SearchIcon"), style: .Plain, target: self, action: #selector(QuotesTableViewController.searchButtonPressed(_:)))
+        searchButton = UIBarButtonItem(image: UIImage(named: "SearchIcon"),
+                                       style: .Plain,
+                                       target: self,
+                                       action: #selector(QuotesTableViewController.searchButtonPressed(_:)))
         navigationItem.rightBarButtonItem = searchButton
+        
+        // Listen for model changes
+        NSNotificationCenter.defaultCenter().addObserverForName(kNotificationQuoteCreated,
+                                                                object: nil,
+                                                                queue: nil) { notif in
+                                                                    self.reloadTableDataSource(clearState: true)
+        }
     }
-
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

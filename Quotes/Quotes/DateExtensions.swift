@@ -40,4 +40,29 @@ extension NSDate {
         if secondsFrom(date) > 0 { return "\(secondsFrom(date))s" }
         return ""
     }
+    
+    func numberOfDaysInCurrentMonth() -> Int {
+        let calendar = NSCalendar.currentCalendar()
+        let range = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: self)
+        let numDays = range.length
+        return numDays
+    }
+    
+    func getDay() -> Int {
+        let calendar = NSCalendar.currentCalendar()
+        let day = calendar.component(.Day, fromDate: self)
+        return day
+    }
+    
+    func getMonth() -> Int {
+        let calendar = NSCalendar.currentCalendar()
+        let month = calendar.component(.Month, fromDate: self)
+        return month
+    }
+    
+    func getYear() -> Int {
+        let calendar = NSCalendar.currentCalendar()
+        let year = calendar.component(.Year, fromDate: self)
+        return year
+    }
 }

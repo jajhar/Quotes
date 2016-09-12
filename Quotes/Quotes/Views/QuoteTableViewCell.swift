@@ -79,7 +79,7 @@ class QuoteTableViewCell: TableViewCell {
         setupQuotationText()
         setupHeardByString()
                 
-        SDWebImageManager.sharedManager().downloadImageWithURL(quote?.owner?.getUserAvatarURL(), options: [], progress: nil, completed: { (image, error, cacheType, didUseCache, imageURL) -> Void in
+        SDWebImageManager.sharedManager().downloadImageWithURL(quote?.saidBy?.getUserAvatarURL(), options: [], progress: nil, completed: { (image, error, cacheType, didUseCache, imageURL) -> Void in
             if (image != nil && error == nil) {
                 self.userImageButton.setImage(image, forState: .Normal)
             } else {
@@ -119,6 +119,7 @@ class QuoteTableViewCell: TableViewCell {
         
         let finalText = NSMutableAttributedString(attributedString: titleText)
         
+        var curIndex = 1
         for user in heardBy {
             
             guard let user = user as? User else { continue }
@@ -134,10 +135,17 @@ class QuoteTableViewCell: TableViewCell {
                     attributes[NSForegroundColorAttributeName] = usernameGrayColor
                 }
             }
+           
+            var userText = username
             
-            let usernameText = NSAttributedString(string: username + ", ",
+            if curIndex < heardBy.count {
+                userText = username + ", "
+            }
+            
+            let usernameText = NSAttributedString(string: userText,
                                                   attributes: attributes)
             finalText.appendAttributedString(usernameText)
+            curIndex += 1
         }
         
         
@@ -184,8 +192,8 @@ class QuoteTableViewCell: TableViewCell {
     }
     
     @IBAction func UserImageTapped(sender: UIButton) {
-        guard let owner = quote?.owner else { return }
-        delegate?.userWasTapped(self, user: owner)
+        guard let saidBy = quote?.saidBy else { return }
+        delegate?.userWasTapped(self, user: saidBy)
     }
     
 }

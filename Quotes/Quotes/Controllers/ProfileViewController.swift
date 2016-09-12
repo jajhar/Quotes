@@ -16,6 +16,7 @@ class ProfileViewController: ViewController {
 
     // MARK: Properties
     var profileHeaderView: ProfileHeaderView!
+    var refreshControl: UIRefreshControl!
     
     var user: User? {
         didSet {
@@ -30,6 +31,11 @@ class ProfileViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if user == nil {
+            // default to the logged in user
+            user = AppData.sharedInstance.localSession?.localUser
+        }
         
         // Setup tableview
         let nib = UINib(nibName: QuoteTableViewCell.NibName(), bundle: nil)
@@ -46,10 +52,10 @@ class ProfileViewController: ViewController {
         profileHeaderView.frame = headerContainerView.bounds
         profileHeaderView.constrainToSuperview()
         
-        if user == nil {
-            // default to the logged in user
-            user = AppData.sharedInstance.localSession?.localUser
-        }
+        // Add Pull to Refresh
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(ProfileViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl)
         
         var headerframe = headerContainerView.frame
         headerframe.size.height = 300.0
@@ -58,7 +64,6 @@ class ProfileViewController: ViewController {
             headerframe.size.height = 300.0
         } else {
             headerframe.size.height = 180.0
-            
         }
         
         headerContainerView.frame = headerframe
@@ -87,10 +92,14 @@ class ProfileViewController: ViewController {
         navigationItem.title = user?.username
     }
     
+    func refresh(sender: AnyObject) {
+        reloadTableDataSource(clearState: true)
+    }
+    
     func reloadTableDataSource(clearState clear: Bool) {
         
         let block :PagerCompletionBlock = { (newQuotes, error) -> Void in
-//            self.refreshControl?.endRefreshing()
+            self.refreshControl.endRefreshing()
             
             // error checking
             if(error != nil) {

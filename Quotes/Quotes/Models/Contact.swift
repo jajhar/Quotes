@@ -31,3 +31,21 @@ class Contact: NSObject, MLPAutoCompletionObject {
         return fullName
     }
 }
+
+extension SwiftAddressBookPerson {
+    
+    func fullName() -> String {
+        var fullName: String = firstName != nil ? firstName! : ""
+        if lastName != nil { fullName = fullName + " " + lastName! }
+        return fullName
+    }
+    
+    func phoneNumbersList() -> [String] {
+        var phoneNumbersList = [String]()
+        for number in phoneNumbers! {
+            phoneNumbersList.append(number.value)
+        }
+        
+        return phoneNumbersList
+    }
+}

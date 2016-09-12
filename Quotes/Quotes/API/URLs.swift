@@ -10,8 +10,9 @@ import Foundation
 
 public class URLs {
 
-    public static let baseURL = NSURL(string: "http://198.199.93.25:1337")
-
+//    public static let baseURL = NSURL(string: "http://198.199.93.25:1337")
+    public static let baseURL = NSURL(string: "http://localhost:1337")
+    
     public class func loginUser() -> NSURL {
         return NSURL(string: "login", relativeToURL: baseURL)!
     }
@@ -38,6 +39,10 @@ public class URLs {
         }
         
         return NSURL(string: url, relativeToURL: baseURL)!
+    }
+    
+    public class func createQuote() -> NSURL {
+        return NSURL(string: "quote", relativeToURL: baseURL)!
     }
     
     public class func searchQuotes(keyword: String, withOffset dateOffset: String?) -> NSURL {

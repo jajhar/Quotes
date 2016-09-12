@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dGY-9O-wDx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dGY-9O-wDx">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -108,14 +108,6 @@
                                                 <color key="textColor" red="0.99215686270000003" green="0.1529411765" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="One or more of your phone contacts..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZQ-Zo-hch" customClass="MLPAutoCompleteTextField">
-                                                <rect key="frame" x="88" y="80" width="492" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="2iA-80-9io"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WHEN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRd-TB-UE5">
                                                 <rect key="frame" x="20" y="149" width="60" height="21"/>
                                                 <constraints>
@@ -134,29 +126,38 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6n-Oj-0iA">
                                                 <rect key="frame" x="88" y="129" width="492" height="60"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4hC-58-Hvc">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4hC-58-Hvc" customClass="ColoredCompletionTextField" customModule="Quotes" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="10" width="157.5" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="1wf-qK-hJz"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="rS4-zZ-q7Y" id="pYu-qj-IgC"/>
+                                                        </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DD" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WyG-L7-gWK">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DD" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WyG-L7-gWK" customClass="ColoredCompletionTextField" customModule="Quotes" customModuleProvider="target">
                                                         <rect key="frame" x="167.5" y="10" width="157.5" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="ebT-9F-CY5"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="rS4-zZ-q7Y" id="YN5-R0-m8O"/>
+                                                        </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="YYYY" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RPl-GN-ebp">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="YYYY" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RPl-GN-ebp" customClass="ColoredCompletionTextField" customModule="Quotes" customModuleProvider="target">
                                                         <rect key="frame" x="334.5" y="10" width="157.5" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="Wtq-2D-d0l"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="rS4-zZ-q7Y" id="rQH-jv-O2S"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -199,6 +200,14 @@
                                                 <color key="textColor" red="0.99215686270000003" green="0.1529411765" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="One or more of your phone contacts..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZQ-Zo-hch" customClass="MLPAutoCompleteTextField">
+                                                <rect key="frame" x="88" y="80" width="492" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="2iA-80-9io"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -258,17 +267,14 @@
                                 <action selector="backButtonPressed:" destination="rS4-zZ-q7Y" id="5In-h6-cl0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" style="plain" systemItem="done" id="vbj-WE-FTK">
-                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="cancelButtonPressed:" destination="TAo-Np-CU4" id="cOr-23-mcQ"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dayTextField" destination="WyG-L7-gWK" id="Tsx-zm-XFb"/>
                         <outlet property="heardTextField" destination="yZQ-Zo-hch" id="36y-yO-AS8"/>
+                        <outlet property="monthTextField" destination="4hC-58-Hvc" id="eO3-5d-XJ4"/>
                         <outlet property="quoteLabel" destination="0Pt-Kr-6BT" id="vu3-ix-tE6"/>
                         <outlet property="saidTextField" destination="4ai-T1-sYe" id="GhQ-5J-wbC"/>
+                        <outlet property="yearTextField" destination="RPl-GN-ebp" id="9iU-3j-6i3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D5l-qP-JrP" userLabel="First Responder" sceneMemberID="firstResponder"/>

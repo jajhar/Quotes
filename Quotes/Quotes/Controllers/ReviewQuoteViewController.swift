@@ -36,6 +36,8 @@ class ReviewQuoteViewController: ViewController {
     var dayPickerView: UIPickerView = UIPickerView()
     var yearPickerView: UIPickerView = UIPickerView()
     var doneBarButtonItem: UIBarButtonItem!
+    var currentHeardByNameString: String = ""
+    var currentSaidByNameString: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +51,6 @@ class ReviewQuoteViewController: ViewController {
         navigationItem.rightBarButtonItem = doneBarButtonItem
         doneBarButtonItem.enabled = false
 
-        
         saidTextField.autoCompleteDataSource = self
         heardTextField.autoCompleteDataSource = self
         saidTextField.autoCompleteDelegate = self
@@ -59,6 +60,9 @@ class ReviewQuoteViewController: ViewController {
         
         saidTextField.delegate = self
         heardTextField.delegate = self
+        
+        saidTextField.addTarget(self, action: #selector(ReviewQuoteViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        heardTextField.addTarget(self, action: #selector(ReviewQuoteViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
         saidTextField.layer.borderWidth = 1
         saidTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -147,14 +151,46 @@ class ReviewQuoteViewController: ViewController {
         yearTextField.text = "\(year)"
     }
     
-    func repopulateHeardByField() {
-        heardTextField.text = ""
-        for person in heardContacts {
-            let fname = person.firstName != nil ? person.firstName! : ""
-            let lname = person.lastName != nil ? person.lastName! : ""
-            let fullName = fname + " " + lname
-            heardTextField.text = heardTextField.text! + fullName + ", "
+    func repopulateHeardByField(withNewContact newContact: SwiftAddressBookPerson?) {
+        
+        var names = currentHeardByNameString.componentsSeparatedByString(", ")
+        
+        if newContact != nil {
+            names.append(heardContacts.last!.fullName())
         }
+        
+        heardTextField.text = ""
+        var objectsToRemove = [SwiftAddressBookPerson]()
+        
+        for i in 0..<heardContacts.count {
+            
+            let person = heardContacts[i]
+            let fullName = person.fullName()
+            
+            var exists = false
+            
+            if names.contains(fullName) {
+                exists = true
+            }
+            
+            if !exists {
+                objectsToRemove.append(person)
+            } else {
+                heardTextField.text = heardTextField.text! + fullName + ", "
+            }
+        }
+        
+        var contacts = [SwiftAddressBookPerson]()
+        
+        for person in heardContacts {
+            if !objectsToRemove.contains(person) {
+                contacts.append(person)
+            }
+        }
+        
+        heardContacts = contacts
+        
+        currentHeardByNameString = heardTextField.text!
     }
     
     func repopulateSaidByField() {
@@ -163,10 +199,14 @@ class ReviewQuoteViewController: ViewController {
             return
         }
         saidTextField.text = ""
-        let fname = saidContact.firstName != nil ? saidContact.firstName! : ""
-        let lname = saidContact.lastName != nil ? saidContact.lastName! : ""
-        let fullName = fname + " " + lname
-        saidTextField.text = saidTextField.text! + fullName
+        let fullName = saidContact.fullName()
+        
+        if currentSaidByNameString == fullName {
+            saidTextField.text = saidTextField.text! + fullName
+            currentSaidByNameString = saidTextField.text!
+        } else {
+            saidTextField.text = ""
+        }
     }
     
     func allFieldsFilled() -> Bool{
@@ -247,6 +287,14 @@ extension ReviewQuoteViewController: UITextFieldDelegate {
         }
     }
     
+    func textFieldDidChange(textField: UITextField) {
+        if textField == heardTextField {
+            currentHeardByNameString = textField.text!
+        } else if textField == saidTextField {
+            currentSaidByNameString = textField.text!
+        }
+    }
+    
     func textFieldDidEndEditing(textField: UITextField) {
         if textField == saidTextField {
             
@@ -260,10 +308,9 @@ extension ReviewQuoteViewController: UITextFieldDelegate {
                 saidTextField.textColor = .redColor()
             }
             
-            
         } else if textField == heardTextField {
             
-            repopulateHeardByField()
+            repopulateHeardByField(withNewContact: nil)
             
             if textField.text!.isEmpty {
                 heardTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -320,12 +367,14 @@ extension ReviewQuoteViewController: MLPAutoCompleteTextFieldDelegate, MLPAutoCo
                 heardContacts.append(person)
             }
             
-            repopulateHeardByField()
+            repopulateHeardByField(withNewContact: person)
+            
         } else if textField == saidTextField {
             
             guard let contact = selectedObject as? Contact else { return }
             guard let person = contact.person else { return }
             saidContact = person
+            currentSaidByNameString = person.fullName()
         }
     }
 }

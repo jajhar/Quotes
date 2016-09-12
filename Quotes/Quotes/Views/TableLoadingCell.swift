@@ -17,16 +17,13 @@ class TableLoadingCell: TableViewCell {
         return "TableLoadingCell"
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+    func showSpinner(animated: Bool) {
         progressHUD?.removeFromSuperview()
         progressHUD = MBProgressHUD(view: self.contentView)
         progressHUD.bezelView.color = .clearColor()
-//        progressHUD.activityIndicatorColor = .blackColor()
         progressHUD.bezelView.opaque = true
         self.contentView.addSubview(progressHUD)
-        progressHUD.showAnimated(false)
+        progressHUD.showAnimated(animated)
     }
     
     override func commonInit() {

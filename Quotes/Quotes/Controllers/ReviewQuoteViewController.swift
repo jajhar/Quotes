@@ -226,7 +226,8 @@ class ReviewQuoteViewController: ViewController {
                                 heardBy: heardContacts,
                                 saidDate: saidDate!, completion: { (newQuote) in
                                     MBProgressHUD.hideHUDForView(self.view, animated: false)
-                                    
+                                    self.dismissViewControllerAnimated(true, completion: nil)
+
             }) { (response, error) in
                 MBProgressHUD.hideHUDForView(self.view, animated: false)
                 print("ERROR Creating Quote: \(error)")

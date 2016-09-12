@@ -140,7 +140,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row >= cnt {
             // loading cell
-            let cell = tableView.dequeueReusableCellWithIdentifier("TableLoadingCell")!
+            let cell = tableView.dequeueReusableCellWithIdentifier("TableLoadingCell") as! TableLoadingCell
+            cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.width*2, 0, 0)
+            cell.showSpinner(false)
             reloadTableDataSource(clearState: false)
             return cell
         }

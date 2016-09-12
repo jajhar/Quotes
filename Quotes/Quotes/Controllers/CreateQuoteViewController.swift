@@ -39,6 +39,7 @@ class CreateQuoteViewController: ViewController {
         
         wordCounterItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.redColor()], forState: .Normal)
         createQuoteItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.redColor()], forState: .Normal)
+        createQuoteItem.enabled = false
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
         
@@ -108,5 +109,6 @@ extension CreateQuoteViewController: UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         wordCounterItem.title = String(format: "%lu", 200 - textView.text.characters.count)
+        createQuoteItem.enabled = textView.text.characters.count >= 1
     }
 }

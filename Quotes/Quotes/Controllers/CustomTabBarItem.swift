@@ -2,7 +2,7 @@
 //  CustomTabBarItem.swift
 //  CustomTabBar
 //
-//  Created by Adam Bardon on 07/03/16.
+//  Created by Adam Bardon on 07/03/16. Modified By James Ajhar
 //  Copyright © 2016 Swift Joureny. All rights reserved.
 //
 

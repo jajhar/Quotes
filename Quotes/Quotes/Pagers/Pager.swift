@@ -2,8 +2,8 @@
 //  Pager.swift
 //  Quotes
 //
-//  Created by Cameron Pierce on 11/25/15.
-//  Copyright © 2015 Cameron Pierce. All rights reserved.
+//  Created by James Ajhar on 8/26/16.
+//  Copyright © 2016 James Ajhar. All rights reserved.
 //
 
 import Foundation

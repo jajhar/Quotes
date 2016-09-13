@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by James Ajhar on 8/26/16.
-//  Copyright © 2016 Cameron Pierce. All rights reserved.
+//  Copyright © 2016 James Ajhar. All rights reserved.
 //
 
 import UIKit

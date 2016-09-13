@@ -129,16 +129,22 @@ class QuotesAPI: APICommunication {
     
     func createQuote(text: String, saidBy: SwiftAddressBookPerson, heardBy: [SwiftAddressBookPerson], saidDate: NSDate, completion: (Quote) -> Void, failure: FailureBlock) {
         
+        var username = saidBy.fullName().stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.alphanumericCharacterSet())
+        if username == nil { username = "" }
+        
         let saidByParams: [String: AnyObject] = [
             "phone": saidBy.phoneNumbersList(),
-            "username": saidBy.fullName()
+            "username": username!
         ]
         
         var heardByList = [[String: AnyObject]]()
         for contact in heardBy {
+            var username = contact.fullName().stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.alphanumericCharacterSet())
+            if username == nil { username = "" }
+
             let obj: [String: AnyObject] = [
                 "phone": contact.phoneNumbersList(),
-                "username": contact.fullName()
+                "username": username!
             ]
             
             heardByList.append(obj)

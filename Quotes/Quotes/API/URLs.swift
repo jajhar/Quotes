@@ -10,8 +10,7 @@ import Foundation
 
 public class URLs {
 
-//    public static let baseURL = NSURL(string: "http://198.199.93.25:1337")
-    public static let baseURL = NSURL(string: "http://localhost:1337")
+    public static let baseURL = NSURL(string: "http://198.199.93.25:1337")
     
     public class func loginUser() -> NSURL {
         return NSURL(string: "login", relativeToURL: baseURL)!

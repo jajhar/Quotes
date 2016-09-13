@@ -60,8 +60,6 @@
 		8CEAE65F1D81091500D2DFFD /* UsernameTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE65D1D81091500D2DFFD /* UsernameTags.swift */; };
 		8CEAE6611D826F6900D2DFFD /* UITextViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE6601D826F6900D2DFFD /* UITextViewExtensions.swift */; };
 		8CEAE6651D8285E100D2DFFD /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEAE6641D8285E100D2DFFD /* Contact.swift */; };
-		8CEF470C1D7567090086CDCC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF470B1D7567090086CDCC /* SearchView.swift */; };
-		8CEF470F1D75673A0086CDCC /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CEF470E1D75673A0086CDCC /* SearchView.xib */; };
 		8CEF47131D7571410086CDCC /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF47111D7571410086CDCC /* CustomTabBar.swift */; };
 		8CEF47141D7571410086CDCC /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF47121D7571410086CDCC /* CustomTabBarItem.swift */; };
 		8CEF47161D7582440086CDCC /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEF47151D7582440086CDCC /* TextView.swift */; };
@@ -141,8 +139,6 @@
 		8CEAE65D1D81091500D2DFFD /* UsernameTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameTags.swift; sourceTree = "<group>"; };
 		8CEAE6601D826F6900D2DFFD /* UITextViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExtensions.swift; sourceTree = "<group>"; };
 		8CEAE6641D8285E100D2DFFD /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		8CEF470B1D7567090086CDCC /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		8CEF470E1D75673A0086CDCC /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
 		8CEF47111D7571410086CDCC /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		8CEF47121D7571410086CDCC /* CustomTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarItem.swift; sourceTree = "<group>"; };
 		8CEF47151D7582440086CDCC /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
@@ -285,7 +281,6 @@
 			children = (
 				8C442A991D71326100E22BE2 /* View.swift */,
 				8C442A9B1D71327200E22BE2 /* Profile */,
-				8CEF470D1D7567150086CDCC /* Search */,
 				8C33DB4D1D7E95FB00FD40D5 /* Input Views */,
 			);
 			path = Views;
@@ -426,15 +421,6 @@
 			name = CreateQuote;
 			sourceTree = "<group>";
 		};
-		8CEF470D1D7567150086CDCC /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				8CEF470B1D7567090086CDCC /* SearchView.swift */,
-				8CEF470E1D75673A0086CDCC /* SearchView.xib */,
-			);
-			name = Search;
-			sourceTree = "<group>";
-		};
 		8CEF47101D75712D0086CDCC /* Tab Bar */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,7 +535,6 @@
 				8C5BBF271D71064C00A8E0A1 /* Assets.xcassets in Resources */,
 				8C5BBF681D71171200A8E0A1 /* MainStoryboard.storyboard in Resources */,
 				8C5BBF861D712E5700A8E0A1 /* ProfileStoryboard.storyboard in Resources */,
-				8CEF470F1D75673A0086CDCC /* SearchView.xib in Resources */,
 				8C5BBF841D712E4800A8E0A1 /* CreateQuoteStoryboard.storyboard in Resources */,
 				8C2EDDFF1D7134BC00246B01 /* ProfileHeaderView.xib in Resources */,
 				8C5BBF221D71064C00A8E0A1 /* LoginStoryboard.storyboard in Resources */,
@@ -680,7 +665,6 @@
 				8C5BBF661D7114BC00A8E0A1 /* TabBarController.swift in Sources */,
 				8C5BBF741D7121DF00A8E0A1 /* QuoteTableViewCell.swift in Sources */,
 				8C8ED2591D754FB6008C956E /* User+CoreDataProperties.swift in Sources */,
-				8CEF470C1D7567090086CDCC /* SearchView.swift in Sources */,
 				8CEF47161D7582440086CDCC /* TextView.swift in Sources */,
 				8C5BBF5F1D71119D00A8E0A1 /* AppData.swift in Sources */,
 				8C5BBF581D710F8500A8E0A1 /* QuotesPager.swift in Sources */,

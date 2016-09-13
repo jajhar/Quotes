@@ -369,8 +369,8 @@
 		8C5BBF721D7121CB00A8E0A1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8C5B3C751D7808AE005E53AC /* Loading */,
 				8C5BBF751D71220500A8E0A1 /* TableViewCell.swift */,
+				8C5B3C751D7808AE005E53AC /* Loading */,
 				8C5BBF7A1D71250800A8E0A1 /* Quote */,
 			);
 			name = Cells;

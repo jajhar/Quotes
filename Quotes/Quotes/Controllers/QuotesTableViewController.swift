@@ -88,6 +88,9 @@ class QuotesTableViewController: UITableViewController {
     }
     
     func searchWithKeyword(keyword: String) {
+        if keyword.isEmpty {
+            return
+        }
         searchTerm = keyword
         searchPager.keyword = searchTerm
         activePager = searchPager
@@ -106,12 +109,6 @@ class QuotesTableViewController: UITableViewController {
     }
     
     // MARK: Helpers
-    
-//    func quotesTablePurged(notification: NSNotification) {
-        // refresh the FRC
-//        fetchedResultsController.
-//        tableView.reloadData()
-//    }
     
     func toggleSearchBar(show: Bool) {
         // Animated search bar display/hide
@@ -216,5 +213,6 @@ extension QuotesTableViewController: ILRemoteSearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
         searchWithKeyword(text)
+        searchBar.resignFirstResponder()
     }
 }

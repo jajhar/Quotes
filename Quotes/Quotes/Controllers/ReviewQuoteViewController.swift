@@ -51,53 +51,9 @@ class ReviewQuoteViewController: ViewController {
         navigationItem.rightBarButtonItem = doneBarButtonItem
         doneBarButtonItem.enabled = false
 
-        saidTextField.autoCompleteDataSource = self
-        heardTextField.autoCompleteDataSource = self
-        saidTextField.autoCompleteDelegate = self
-        heardTextField.autoCompleteDelegate = self
-        saidTextField.reverseAutoCompleteSuggestionsBoldEffect = true
-        heardTextField.reverseAutoCompleteSuggestionsBoldEffect = true
-        
-        saidTextField.delegate = self
-        heardTextField.delegate = self
-        
-        saidTextField.addTarget(self, action: #selector(ReviewQuoteViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-        heardTextField.addTarget(self, action: #selector(ReviewQuoteViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-        
-        saidTextField.layer.borderWidth = 1
-        saidTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
-        heardTextField.layer.borderWidth = 1
-        heardTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
-        
-        monthPickerView.delegate = self
-        monthPickerView.dataSource = self
-        dayPickerView.delegate = self
-        dayPickerView.dataSource = self
-        yearPickerView.delegate = self
-        yearPickerView.dataSource = self
-        
-        
-        // auto select last row (current year) on year picker
-        yearPickerView.reloadAllComponents()
-        yearPickerView.selectRow(yearPickerView.numberOfRowsInComponent(0)-1, inComponent: 0, animated: false)
-
-        let toolBar = UIToolbar(frame: CGRectZero)
-        let doneButton = UIBarButtonItem(title: "Done",
-                                         style: .Done,
-                                         target: self,
-                                         action: #selector(ReviewQuoteViewController.pickerViewDonePressed(_:)))
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-        toolBar.items = [flexibleSpace, doneButton]
-        toolBar.sizeToFit()
-
-        monthTextField.inputView = monthPickerView
-        dayTextField.inputView = dayPickerView
-        yearTextField.inputView = yearPickerView
-        
-        monthTextField.inputAccessoryView = toolBar
-        dayTextField.inputAccessoryView = toolBar
-        yearTextField.inputAccessoryView = toolBar
-
+        setupTextFields()
+        setupPickerViews()
+        setupDateToolBar()
         setupQuoteText()
     }
     
@@ -121,6 +77,70 @@ class ReviewQuoteViewController: ViewController {
         }
         quoteLabel.attributedText = NSAttributedString.AttributedStringWithQuotations(text,
                                                                                       attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
+    }
+    
+    func setupTextFields() {
+        saidTextField.autoCompleteDataSource = self
+        heardTextField.autoCompleteDataSource = self
+        saidTextField.autoCompleteDelegate = self
+        heardTextField.autoCompleteDelegate = self
+        saidTextField.reverseAutoCompleteSuggestionsBoldEffect = true
+        heardTextField.reverseAutoCompleteSuggestionsBoldEffect = true
+        
+        saidTextField.delegate = self
+        heardTextField.delegate = self
+        
+        saidTextField.addTarget(self, action: #selector(ReviewQuoteViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        heardTextField.addTarget(self, action: #selector(ReviewQuoteViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        
+        saidTextField.layer.borderWidth = 1
+        saidTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
+        heardTextField.layer.borderWidth = 1
+        heardTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
+        
+        let toolBar = UIToolbar(frame: CGRectZero)
+        let doneButton = UIBarButtonItem(title: "Done",
+                                         style: .Done,
+                                         target: self,
+                                         action: #selector(ReviewQuoteViewController.textFieldDonePressed(_:)))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        toolBar.items = [flexibleSpace, doneButton]
+        toolBar.sizeToFit()
+        
+        saidTextField.inputAccessoryView = toolBar
+        heardTextField.inputAccessoryView = toolBar
+    }
+    
+    func setupPickerViews() {
+        monthPickerView.delegate = self
+        monthPickerView.dataSource = self
+        dayPickerView.delegate = self
+        dayPickerView.dataSource = self
+        yearPickerView.delegate = self
+        yearPickerView.dataSource = self
+        
+        // auto select last row (current year) on year picker
+        yearPickerView.reloadAllComponents()
+        yearPickerView.selectRow(yearPickerView.numberOfRowsInComponent(0)-1, inComponent: 0, animated: false)
+    }
+    
+    func setupDateToolBar() {
+        let dateToolBar = UIToolbar(frame: CGRectZero)
+        let donePickingButton = UIBarButtonItem(title: "Done",
+                                                style: .Done,
+                                                target: self,
+                                                action: #selector(ReviewQuoteViewController.pickerViewDonePressed(_:)))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        dateToolBar.items = [flexibleSpace, donePickingButton]
+        dateToolBar.sizeToFit()
+        
+        monthTextField.inputView = monthPickerView
+        dayTextField.inputView = dayPickerView
+        yearTextField.inputView = yearPickerView
+        
+        monthTextField.inputAccessoryView = dateToolBar
+        dayTextField.inputAccessoryView = dateToolBar
+        yearTextField.inputAccessoryView = dateToolBar
     }
     
     func requestABAccess() {
@@ -226,6 +246,11 @@ class ReviewQuoteViewController: ViewController {
     
     @IBAction func backButtonPressed(sender: UIBarButtonItem) {
         navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func textFieldDonePressed(sender: AnyObject) {
+        saidTextField.resignFirstResponder()
+        heardTextField.resignFirstResponder()
     }
     
     func pickerViewDonePressed(sender: AnyObject) {

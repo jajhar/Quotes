@@ -50,9 +50,9 @@ public class URLs {
         let url : String
         
         if(dateOffset != nil && dateOffset?.characters.count > 0) {
-            url = String(format: "search/quotes/%@?dateOffset=%@", keyword, dateOffset!)
+            url = String(format: "search/quotes/%@?dateOffset=%@", keyword, dateOffset!).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         } else {
-            url = String(format: "search/quotes/%@", keyword)
+            url = String(format: "search/quotes/%@", keyword).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         }
         
         return NSURL(string: url, relativeToURL: baseURL)!
